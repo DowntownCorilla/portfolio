@@ -1,0 +1,297 @@
+/* 모달 오버레이 - 화면 전체를 덮는 반투명 배경 */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 1rem;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* 모달 컨텐츠 */
+.modalContent {
+  background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+  border-radius: 1rem;
+  max-width: 800px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  animation: slideUp 0.3s ease-out;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(201, 167, 124, 0.2);
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* 스크롤바 스타일링 */
+.modalContent::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modalContent::-webkit-scrollbar-track {
+  background: rgba(201, 167, 124, 0.05);
+  border-radius: 4px;
+}
+
+.modalContent::-webkit-scrollbar-thumb {
+  background: rgba(201, 167, 124, 0.3);
+  border-radius: 4px;
+}
+
+.modalContent::-webkit-scrollbar-thumb:hover {
+  background: rgba(201, 167, 124, 0.5);
+}
+
+/* 닫기 버튼 */
+.closeButton {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: rgba(201, 167, 124, 0.1);
+  border: none;
+  color: #c9a77c;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.25rem;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.closeButton:hover {
+  background: rgba(201, 167, 124, 0.2);
+  transform: rotate(90deg);
+}
+
+/* 모달 헤더 */
+.modalHeader {
+  padding: 2rem 2rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 2rem;
+}
+
+.modalTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 3rem 0.5rem 0; /* 닫기 버튼 공간 확보 */
+  line-height: 1.3;
+}
+
+.period {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+/* 모달 바디 */
+.modalBody {
+  padding: 0 2rem 2rem;
+}
+
+/* 메타 정보 */
+.metaInfo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 0.5rem;
+}
+
+.metaItem {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.metaLabel {
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 500;
+}
+
+.metaValue {
+  color: #fff;
+  font-weight: 600;
+}
+
+/* 섹션 */
+.section {
+  margin-bottom: 2rem;
+}
+
+.sectionTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid rgba(201, 167, 124, 0.5);
+}
+
+/* 기술 태그 */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag {
+  padding: 0.5rem 1rem;
+  background: rgba(201, 167, 124, 0.15);
+  color: #c9a77c;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: 1px solid rgba(201, 167, 124, 0.3);
+}
+
+/* 설명 텍스트 */
+.description {
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.8;
+  white-space: pre-line; /* 줄바꿈 유지 */
+  font-size: 1rem;
+}
+
+/* 리스트 */
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.listItem {
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.8;
+  padding-left: 1.5rem;
+  position: relative;
+  margin-bottom: 0.75rem;
+}
+
+.listItem::before {
+  content: '▹';
+  position: absolute;
+  left: 0;
+  color: #c9a77c;
+  font-weight: bold;
+}
+
+/* 링크 버튼들 */
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.linkButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: rgba(201, 167, 124, 0.2);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(201, 167, 124, 0.3);
+}
+
+.linkButton:hover {
+  background: rgba(201, 167, 124, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(201, 167, 124, 0.4);
+}
+
+.liveButton {
+  background: #c9a77c;
+  color: #000;
+  border-color: #c9a77c;
+}
+
+.liveButton:hover {
+  background: #b8966b;
+  box-shadow: 0 4px 12px rgba(201, 167, 124, 0.5);
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .modalContent {
+    max-height: 95vh;
+    margin: 0.5rem;
+  }
+
+  .modalHeader {
+    padding: 1.5rem 1.5rem 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .modalTitle {
+    font-size: 1.5rem;
+    margin-right: 2.5rem;
+  }
+
+  .modalBody {
+    padding: 0 1.5rem 1.5rem;
+  }
+
+  .closeButton {
+    top: 1rem;
+    right: 1rem;
+    width: 36px;
+    height: 36px;
+    font-size: 1.1rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.1rem;
+  }
+
+  .metaInfo {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .links {
+    flex-direction: column;
+  }
+
+  .linkButton {
+    width: 100%;
+    justify-content: center;
+  }
+}
+

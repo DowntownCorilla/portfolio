@@ -2,26 +2,53 @@
 @tailwind components;
 @tailwind utilities;
 
+/* 전역 스타일 및 커스텀 변수 */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  --accent: #C9A77C;
+  --accent-dark: #B8966B;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* 부드러운 스크롤 적용 */
+html {
+  scroll-behavior: smooth;
 }
 
+/* 기본 바디 스타일 */
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  overflow-x: hidden;
 }
 
+/* 스크롤바 커스터마이징 (웹킷 브라우저) */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #C9A77C;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #B8966B;
+}
+
+/* 유틸리티 클래스 */
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+  
+  /* 컨테이너 최대 너비 */
+  .container {
+    max-width: 1280px;
   }
 }
