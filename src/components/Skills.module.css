@@ -1,6 +1,6 @@
 /* Skills 섹션 스타일 */
 .skills {
-  padding: 5rem 0;
+  padding: 3rem 0;
   background-color: #0f0f0f;
 }
 
@@ -14,7 +14,7 @@
   font-size: 2.25rem;
   font-weight: bold;
   color: white;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 }
 
 @media (min-width: 768px) {
@@ -23,65 +23,100 @@
   }
 }
 
-/* 스킬 그리드 */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
+/* 무한 스크롤 로고 루프 */
+.logoLoop {
+  position: relative;
+  overflow: hidden;
+  padding: 1rem 0;
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 }
 
-@media (min-width: 640px) {
-  .grid {
-    grid-template-columns: repeat(3, 1fr);
+.logoTrack {
+  display: flex;
+  gap: 4rem;
+  animation: scroll 40s linear infinite;
+  width: max-content;
+}
+
+.logoLoop:hover .logoTrack {
+  animation: scroll 100s linear infinite;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
   }
 }
 
-@media (min-width: 768px) {
-  .grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-@media (min-width: 1024px) {
-  .grid {
-    grid-template-columns: repeat(5, 1fr);
-  }
-}
-
-.skillCard {
-  background-color: #1a1a1a;
-  padding: 1.5rem;
-  border-radius: 0.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  transition: all 0.3s;
-}
-
-.skillCard:hover {
-  border-color: rgba(201, 167, 124, 0.5);
-  transform: translateY(-0.25rem);
-}
-
-.skillContent {
+.logoItem {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.75rem;
+  min-width: 120px;
+  padding: 1rem;
+  transition: all 0.3s ease;
 }
 
-.icon {
-  font-size: 2.25rem;
-  transition: color 0.3s;
+.logoItem:hover {
+  transform: translateY(-0.25rem);
 }
 
-.skillName {
+.logoIcon {
+  font-size: 2.5rem;
+  transition: all 0.3s ease;
+}
+
+.logoItem:hover .logoIcon {
+  transform: scale(1.1);
+}
+
+.logoName {
   color: #d1d5db;
   font-size: 0.875rem;
   font-weight: 500;
   text-align: center;
+  white-space: nowrap;
   transition: color 0.3s;
 }
 
-.skillCard:hover .skillName {
+.logoItem:hover .logoName {
   color: white;
 }
 
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .skills {
+    padding: 2rem 0;
+  }
+
+  .title {
+    margin-bottom: 1.5rem;
+  }
+
+  .logoLoop {
+    padding: 0.5rem 0;
+  }
+
+  .logoTrack {
+    gap: 2rem;
+    animation-duration: 30s;
+  }
+
+  .logoItem {
+    min-width: 100px;
+    padding: 0.75rem;
+  }
+
+  .logoIcon {
+    font-size: 2rem;
+  }
+
+  .logoName {
+    font-size: 0.75rem;
+  }
+}
