@@ -67,10 +67,32 @@
   overflow: hidden;
 }
 
+.projectImage {
+  transition: transform 0.3s ease;
+}
+
+.projectCard:hover .projectImage {
+  transform: scale(1.05);
+}
+
 .imageOverlay {
   position: absolute;
   inset: 0;
-  background-color: rgba(201, 167, 124, 0.05);
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0.6)
+  );
+  z-index: 1;
+  transition: background 0.3s ease;
+}
+
+.projectCard:hover .imageOverlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(201, 167, 124, 0.2),
+    rgba(201, 167, 124, 0.4)
+  );
 }
 
 .imagePlaceholder {

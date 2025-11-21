@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { FaGithub } from 'react-icons/fa';
 import styles from './Projects.module.css';
 import { projects } from '@/data/projects';
@@ -47,10 +48,17 @@ export default function Projects() {
                 }
               }}
             >
-              {/* 프로젝트 이미지 플레이스홀더 */}
+              {/* 프로젝트 이미지 */}
               <div className={styles.imageWrapper}>
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  fill
+                  className={styles.projectImage}
+                  style={{ objectFit: 'contain' }}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
                 <div className={styles.imageOverlay}></div>
-                <div className={styles.imagePlaceholder}>📱</div>
               </div>
 
               {/* 프로젝트 정보 */}
@@ -60,7 +68,7 @@ export default function Projects() {
 
                 {/* 기술 태그 */}
                 <div className={styles.tags}>
-                  {project.tags.map((tag) => (
+                  {project.preTags.map((tag) => (
                     <span key={tag} className={styles.tag}>
                       {tag}
                     </span>

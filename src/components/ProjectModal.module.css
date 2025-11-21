@@ -70,8 +70,8 @@
 /* 닫기 버튼 */
 .closeButton {
   position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
+  top: 2rem;
+  right: 2rem;
   background: rgba(201, 167, 124, 0.1);
   border: none;
   color: #c9a77c;
@@ -84,7 +84,7 @@
   cursor: pointer;
   font-size: 1.25rem;
   transition: all 0.3s ease;
-  z-index: 10;
+  z-index: 1;
 }
 
 .closeButton:hover {
@@ -94,9 +94,14 @@
 
 /* 모달 헤더 */
 .modalHeader {
+  position: sticky;
+  top: 0;
   padding: 2rem 2rem 1rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+  z-index: 100;
   margin-bottom: 2rem;
+  backdrop-filter: blur(10px);
 }
 
 .modalTitle {
@@ -116,6 +121,119 @@
 /* 모달 바디 */
 .modalBody {
   padding: 0 2rem 2rem;
+}
+
+/* 이미지 캐러셀 */
+.carouselContainer {
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.carouselWrapper {
+  position: relative;
+  width: 100%;
+  max-height: 400px;
+  aspect-ratio: 21 / 9;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  background: linear-gradient(to bottom right, #1f1f1f, #0f0f0f);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.carouselTrack {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  height: 100%;
+}
+
+.carouselSlide {
+  min-width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.carouselImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 캐러셀 버튼 */
+.carouselButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(201, 167, 124, 0.3);
+  color: #c9a77c;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+  font-size: 1.2rem;
+}
+
+.carouselButton:hover {
+  background: rgba(201, 167, 124, 0.3);
+  border-color: rgba(201, 167, 124, 0.6);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.carouselButtonPrev {
+  left: 1rem;
+}
+
+.carouselButtonNext {
+  right: 1rem;
+}
+
+/* 인디케이터 (dots) */
+.carouselIndicators {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.carouselDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid rgba(201, 167, 124, 0.5);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.carouselDot:hover {
+  background: rgba(201, 167, 124, 0.5);
+  transform: scale(1.2);
+}
+
+.carouselDotActive {
+  background: #c9a77c;
+  border-color: #c9a77c;
+}
+
+/* 이미지 카운터 */
+.carouselCounter {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  background: rgba(0, 0, 0, 0.7);
+  color: #c9a77c;
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border: 1px solid rgba(201, 167, 124, 0.3);
+  z-index: 10;
 }
 
 /* 메타 정보 */
@@ -206,6 +324,56 @@
   font-weight: bold;
 }
 
+/* 도전과제 목록 */
+.challengesList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.challengeItem {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.challengeItem:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(201, 167, 124, 0.3);
+  transform: translateY(-2px);
+}
+
+.challengeProblem,
+.challengeSolution {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.challengeProblem {
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.challengeLabel {
+  color: #c9a77c;
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.challengeText {
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.7;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
 /* 링크 버튼들 */
 .links {
   display: flex;
@@ -269,8 +437,8 @@
   }
 
   .closeButton {
-    top: 1rem;
-    right: 1rem;
+    top: 1.5rem;
+    right: 1.5rem;
     width: 36px;
     height: 36px;
     font-size: 1.1rem;
@@ -293,5 +461,47 @@
     width: 100%;
     justify-content: center;
   }
-}
 
+  .challengeItem {
+    padding: 1rem;
+  }
+
+  .challengeLabel {
+    font-size: 0.85rem;
+  }
+
+  .challengeText {
+    font-size: 0.9rem;
+  }
+
+  .carouselWrapper {
+    max-height: 300px;
+    aspect-ratio: 16 / 9;
+  }
+
+  .carouselButton {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+
+  .carouselButtonPrev {
+    left: 0.5rem;
+  }
+
+  .carouselButtonNext {
+    right: 0.5rem;
+  }
+
+  .carouselCounter {
+    bottom: 0.5rem;
+    right: 0.5rem;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.75rem;
+  }
+
+  .carouselDot {
+    width: 8px;
+    height: 8px;
+  }
+}
