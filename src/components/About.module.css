@@ -114,3 +114,9 @@
   color: #c9a77c;
   font-weight: 600;
 }
+
+@media (max-width: 768px) {
+  .description {
+    font-size: 1rem;
+  }
+}

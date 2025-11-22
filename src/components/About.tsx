@@ -20,16 +20,18 @@ export default function About() {
           {/* 설명 텍스트 */}
           <div className={styles.content}>
             <h3 className={styles.subtitle}>
-              안녕하세요, <span className={styles.highlight}>프론트엔드 개발자 Corilla (이윤재)</span> 입니다.
+              안녕하세요, 화면 뒤의 <span className={styles.highlight}>&apos;비즈니스 흐름&apos;</span>까지 설계하는
+              개발자 <span className={styles.highlight}>이윤재</span>입니다.
             </h3>
             <p className={styles.description}>
-              저는 단순히 개발만 하는 것이 아니라, 사용자의 흐름을 기획하고, 필요한 기능을 스스로 정의하며, 그걸 실제
-              서비스로 구현하는 과정 전체를 경험해온 개발자입니다. 사수가 없는 환경에서 기획·UI 설계·기능
-              구현·테스트·운영을 모두 직접 해오며 &apos;어떻게 해야 이 서비스가 실제 사용자에게 문제 없이 동작할까&apos;
-              를 가장 현실적으로 고민할 수 있었습니다. 이 과정에서 저는 바이브 코딩(Vibe Coding) 을 통해 아이디어를
-              빠르게 프로토타입으로 만들고, 기능 개선과 반복 개발을 통해 서비스를 실제 운영 수준까지 끌어올렸습니다.
-              특히 제가 개발한 프로젝트들은 모두 실제 사용자들을 목표로한 서비스였으며, 그 속에서 다음과 같은 복잡한
-              문제들을 해결해내며 성장했습니다.
+              저는 예쁜 UI를 넘어, 실제 서비스가 작동하게 만드는{' '}
+              <span className={styles.highlight}>&apos;데이터의 흐름&apos;</span>과{' '}
+              <span className={styles.highlight}>&apos;운영 시스템&apos;</span>에 집중합니다. 사용자 서비스뿐만 아니라
+              운영진을 위한 <span className={styles.highlight}>어드민(Admin) 시스템</span>을 직접 기획하고 개발하며,
+              &quot;개발은 결국 비즈니스 문제를 해결하는 도구&quot;라는 것을 체득했습니다. 또한, 팀의 목표를 위해서라면
+              어떤 난관이 있어도 <strong className={styles.highlight}>기어이 서비스를 런칭해내는 집요함(Grit)</strong>을
+              가지고 있습니다. AI 도구를 활용한 빠른 프로토타이핑과 검증된 실행력으로, 아이디어를 가장 확실한
+              &apos;결과물&apos;로 만들어내는 개발자가 되겠습니다.
             </p>
           </div>
         </div>
