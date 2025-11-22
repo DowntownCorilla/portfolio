@@ -1,3 +1,5 @@
+'use client';
+
 import {
   SiTypescript,
   SiReact,
@@ -15,6 +17,7 @@ import { CgGirl } from 'react-icons/cg';
 import { FaMasksTheater } from 'react-icons/fa6';
 import { TbBeta } from 'react-icons/tb';
 
+import LogoLoop from './LogoLoop';
 import styles from './Skills.module.css';
 
 // Skills 섹션 - 기술 스택 무한 루프 애니메이션
@@ -38,36 +41,36 @@ export default function Skills() {
     { name: 'GitHub', icon: SiGithub, color: '#FFFFFF' },
   ];
 
+  // LogoLoop에 전달할 로고 데이터 변환
+  const logoItems = skills.map((skill) => {
+    const Icon = skill.icon;
+    return {
+      node: (
+        <div className={styles.logoItem}>
+          <Icon className={styles.logoIcon} style={{ color: skill.color }} />
+          <span className={styles.logoName}>{skill.name}</span>
+        </div>
+      ),
+      title: skill.name,
+      ariaLabel: skill.name,
+    };
+  });
+
   return (
     <section id="skills" className={styles.skills}>
       <div className={styles.container}>
         <h2 className={styles.title}>My Skills</h2>
 
-        {/* 무한 스크롤 로고 루프 */}
-        <div className={styles.logoLoop}>
-          {/* 첫 번째 세트 */}
-          <div className={styles.logoTrack}>
-            {skills.map((skill, index) => {
-              const Icon = skill.icon;
-              return (
-                <div key={`${skill.name}-1-${index}`} className={styles.logoItem}>
-                  <Icon className={styles.logoIcon} style={{ color: skill.color }} />
-                  <span className={styles.logoName}>{skill.name}</span>
-                </div>
-              );
-            })}
-            {/* 두 번째 세트 (무한 루프를 위한 복제) */}
-            {skills.map((skill, index) => {
-              const Icon = skill.icon;
-              return (
-                <div key={`${skill.name}-2-${index}`} className={styles.logoItem}>
-                  <Icon className={styles.logoIcon} style={{ color: skill.color }} />
-                  <span className={styles.logoName}>{skill.name}</span>
-                </div>
-              );
-            })}
-          </div>
-        </div>
+        {/* react-bits LogoLoop 컴포넌트 사용 */}
+        <LogoLoop
+          logos={logoItems}
+          speed={60}
+          direction="left"
+          logoHeight={80}
+          gap={32}
+          pauseOnHover
+          ariaLabel="기술 스택"
+        />
       </div>
     </section>
   );

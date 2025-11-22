@@ -23,34 +23,7 @@
   }
 }
 
-/* 무한 스크롤 로고 루프 */
-.logoLoop {
-  position: relative;
-  overflow: hidden;
-  padding: 1rem 0;
-  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-}
-
-.logoTrack {
-  display: flex;
-  gap: 4rem;
-  animation: scroll 40s linear infinite;
-  width: max-content;
-}
-
-.logoLoop:hover .logoTrack {
-  animation: scroll 100s linear infinite;
-}
-
-@keyframes scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
+/* LogoLoop 컴포넌트용 스타일 */
 
 .logoItem {
   display: flex;
@@ -96,15 +69,6 @@
 
   .title {
     margin-bottom: 1.5rem;
-  }
-
-  .logoLoop {
-    padding: 0.5rem 0;
-  }
-
-  .logoTrack {
-    gap: 2rem;
-    animation-duration: 30s;
   }
 
   .logoItem {
