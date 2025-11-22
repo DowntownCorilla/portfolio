@@ -27,8 +27,10 @@ export interface Project {
   liveUrl?: string;
   // 프로젝트 기간
   period?: string;
-  // 주요 기능 목록
-  features?: string[];
+  // 주요 기여 및 담당 업무 목록
+  contributions?: string[];
+  // 기여도 (예: "80%", "Frontend 100%")
+  contributionRate?: string;
   // 기술적 도전과제 및 해결방안
   challenges?: Challenge[];
   // 프로젝트에서의 역할

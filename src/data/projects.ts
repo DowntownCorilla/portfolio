@@ -17,43 +17,55 @@ export const projects: Project[] = [
     preTags: ['Next.js', 'React', 'React Native', 'TypeScript', 'Emotion'],
     tags: ['Next.js', 'React', 'React Native', 'Emotion', 'TypeScript'],
     image: '/project1/cover_p1.png',
-    detailImages: ['/project1/cover_p1.png', '/project1/cover_p1.png', '/project1/cover_p1.png'],
+    detailImages: [
+      '/project1/cover_p1.png',
+      '/project1/landing_p1.png',
+      '/project1/editor_p1.png',
+      '/project1/payment_p1.png',
+      '/project1/mypage_p1.png',
+    ],
     github: 'https://github.com/MailMovers/mailmavers-frontend',
     liveUrl: 'https://mailtree.co.kr',
     period: '2024.08 - 2025.06 (10개월)',
     role: 'Frontend Developer',
     teamSize: '팀 프로젝트 (풀스택 1명, 프론트엔드 1명, 백엔드 2명)',
-    // 주요 기능
-    features: [
-      '반응형 디자인으로 모든 디바이스에서 최적화된 사용자 경험',
-      '실시간 재고 관리 시스템',
-      '장바구니 및 위시리스트 기능',
-      'Stripe를 통한 안전한 결제 처리',
-      '주문 추적 및 이메일 알림',
-      '관리자 대시보드를 통한 제품 및 주문 관리',
-      'SEO 최적화 및 성능 개선',
+    contributionRate: 'Main Frontend Developer (기여도 70% 이상)',
+    // 주요 기여 및 담당 업무
+    contributions: [
+      '상품 목록/상세, 메인 홈 화면 등 핵심 사용자 화면 고도화 진행',
+      '장바구니 및 결제 플로우 고도화 (Toss Payments 연동)',
+      '로그인·회원가입·세션 관리 등 인증 로직 구현',
+      '마이페이지 전체 기능 개발',
+      '사진 업로드 및 이미지 크롭 기능 구현',
+      'React Native WebView 대응 및 모바일 앱 UI/기능 최적화',
+      '전역 상태관리 및 대부분의 API 연동 구조 개발',
     ],
     // 기술적 도전과제 및 해결방안
     challenges: [
       {
-        problem: '초기 렌더링 속도가 느려 사용자 이탈률이 높았음',
+        problem: '로그인 상태 관리 불일치 및 토큰 갱신 문제',
         solution:
-          'Next.js의 서버 컴포넌트와 클라이언트 컴포넌트를 적절히 분리하고, 동적 import를 활용하여 번들 크기를 40% 감소시켜 초기 로딩 시간을 2초에서 0.8초로 단축',
+          'Axios Interceptor에서 401 에러 발생 시 LocalStorage의 토큰을 직접 갱신하고 헤더를 재설정한 뒤 원본 요청을 재수행하도록 일원화하여, 상태 관리 라이브러리(Recoil) 의존성을 제거하고 인증 로직의 신뢰성 확보',
       },
       {
-        problem: '여러 사용자가 동시에 같은 상품을 구매할 때 재고 불일치 문제 발생',
+        problem: 'iOS에서 이미지 크롭 시 배경이 투명/검정으로 나오는 문제',
         solution:
-          'Optimistic UI 업데이트와 낙관적 잠금(Optimistic Locking)을 구현하여 실시간 재고 동기화를 구현하고, 재고 부족 시 즉각적인 사용자 피드백 제공',
+          "globalCompositeOperation = 'destination-over' 속성을 활용해 캔버스 최하단 레이어에 강제로 흰색(fillStyle = '#FFFFFF')을 합성하여, iOS에서도 일관된 흰색 배경이 적용되도록 구현",
       },
       {
-        problem: '결제 처리 중 네트워크 오류로 인한 결제 상태 불일치',
+        problem: 'iOS에서 PNG 포맷 이미지 등록 실패 및 호환성 문제',
         solution:
-          'Stripe webhook을 구현하여 비동기 결제 이벤트를 안정적으로 처리하고, 멱등성 키(Idempotency Key)를 활용해 중복 결제 방지',
+          'User Agent로 iOS 환경을 감지(isIOS)하여, iOS일 때만 압축 효율이 좋은 image/jpeg (품질 0.9) 포맷으로 변환(toDataURL)하고 Blob으로 재가공하여 업로드 안정성 확보',
       },
       {
-        problem: '대용량 상품 이미지로 인한 느린 페이지 로딩',
-        solution:
-          'Next.js Image 컴포넌트의 자동 최적화 기능과 lazy loading을 활용하고, WebP 포맷 전환으로 이미지 용량을 평균 60% 감소시켜 로딩 속도 개선',
+        problem: '결제 프로세스의 복잡한 상태 관리 최적화 (Props Drilling 해결)',
+        solution: `1. 상태 분리 전략: 페이지 내에서만 일시적으로 쓰이는 UI 상태(모달 Open 여부 등)는 Custom Hook(useModal)으로 분리하여 로직을 캡슐화.
+                   2. 전역 상태 도입: 여러 컴포넌트 깊숙이 전달되어야 하거나 다른 페이지(주소록 모달 등)와 공유해야 하는 데이터(주소 정보, 선택한 우표 등)는 Recoil Atom(selectedSenderAddressDataState 등)으로 전역 관리하여 Props 전달 없이 필요한 컴포넌트에서 직접 구독하여 사용하도록 리팩토링.`,
+      },
+      {
+        problem: '소셜 로그인 연동 시 인증 플로우 문제 발생',
+        solution: `초기에는 클라이언트(프론트)에서 소셜 로그인 SDK로 직접 인증 코드를 받아 백엔드로 전달하려 했으나, 인가 코드(Authorization Code)만으로는 회원가입 여부 확인 및 JWT 토큰 발급이 불가능함을 인지함.
+                   프론트엔드는 "로그인 요청"만 보내고, 실제 인증/회원가입/토큰 발급은 백엔드에서 처리한 후 리다이렉트 URL을 통해 결과(토큰)만 프론트로 전달받는 방식으로 플로우 재설계.`,
       },
     ],
   },
@@ -80,7 +92,7 @@ export const projects: Project[] = [
     period: '2023.10 - 2023.12 (2개월)',
     role: 'Full Stack Developer',
     teamSize: '2명 (프론트엔드 1명, 백엔드 1명)',
-    features: [
+    contributions: [
       '실시간 1:1 및 그룹 채팅',
       '파일 및 이미지 공유 기능',
       '사용자 온라인/오프라인 상태 표시',
@@ -135,7 +147,7 @@ export const projects: Project[] = [
     period: '2023.10 - 2023.12 (2개월)',
     role: 'Full Stack Developer',
     teamSize: '2명 (프론트엔드 1명, 백엔드 1명)',
-    features: [
+    contributions: [
       '실시간 1:1 및 그룹 채팅',
       '파일 및 이미지 공유 기능',
       '사용자 온라인/오프라인 상태 표시',
@@ -190,7 +202,7 @@ export const projects: Project[] = [
     period: '2023.10 - 2023.12 (2개월)',
     role: 'Full Stack Developer',
     teamSize: '2명 (프론트엔드 1명, 백엔드 1명)',
-    features: [
+    contributions: [
       '실시간 1:1 및 그룹 채팅',
       '파일 및 이미지 공유 기능',
       '사용자 온라인/오프라인 상태 표시',

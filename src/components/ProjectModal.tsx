@@ -110,14 +110,19 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
             </div>
           )}
 
-          {/* 주요 기능 */}
-          {project.features && project.features.length > 0 && (
+          {/* 주요 기여 및 담당 업무 */}
+          {project.contributions && project.contributions.length > 0 && (
             <div className={styles.section}>
-              <h3 className={styles.sectionTitle}>주요 기능</h3>
+              <h3 className={styles.sectionTitle}>
+                주요 기여 및 담당 업무
+                {project.contributionRate && (
+                  <span className={styles.contributionBadge}>{project.contributionRate}</span>
+                )}
+              </h3>
               <ul className={styles.list}>
-                {project.features.map((feature, index) => (
+                {project.contributions.map((contribution, index) => (
                   <li key={index} className={styles.listItem}>
-                    {feature}
+                    {contribution}
                   </li>
                 ))}
               </ul>
