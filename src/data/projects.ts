@@ -15,7 +15,18 @@ export const projects: Project[] = [
 웹 에디터를 통해 작성된 편지를 자동 페이지 분할 및 미리보기 기능을 통해 실제 우편물처럼 받아볼 수 있는 경험을 제공합니다.
     `,
     preTags: ['Next.js', 'React', 'React Native', 'TypeScript', 'Emotion'],
-    tags: ['Next.js', 'React', 'React Native', 'Emotion', 'TypeScript'],
+    tags: [
+      'Next.js',
+      'React',
+      'React Native',
+      'Emotion',
+      'TypeScript',
+      'React-query',
+      'Axios',
+      'Recoil',
+      'Recoil-Persist',
+      'Toss Payments',
+    ],
     image: '/project1/cover_p1.png',
     detailImages: [
       '/project1/cover_p1.png',
@@ -29,7 +40,7 @@ export const projects: Project[] = [
     period: '2024.08 - 2025.06 (10개월)',
     role: 'Frontend Developer',
     teamSize: '팀 프로젝트 (풀스택 1명, 프론트엔드 1명, 백엔드 2명)',
-    contributionRate: 'Main Frontend Developer (기여도 70% 이상)',
+    contributionRate: 'Main Frontend Developer (기여도 60% 이상)',
     // 주요 기여 및 담당 업무
     contributions: [
       '상품 목록/상세, 메인 홈 화면 등 핵심 사용자 화면 고도화 진행',
@@ -71,166 +82,98 @@ export const projects: Project[] = [
   },
   {
     id: 2,
-    title: 'Real-time Chat App',
-    description:
-      'A full-stack chat application using Socket.IO for real-time messaging with a clean and dynamic user interface.',
+    title: '메일트리(어드민) - 관리자 페이지',
+    description: '운영 효율성을 극대화한 Next.js 14 기반의 백오피스 시스템',
     detailedDescription: `
-      Socket.IO를 활용한 실시간 채팅 애플리케이션입니다. 
-      WebSocket 기술을 이용하여 지연 시간 없는 메시지 전송과 
-      실시간 사용자 상태 업데이트를 구현했습니다.
-      
-      Node.js와 Express를 백엔드로 사용하고, React로 구축한 
-      직관적인 사용자 인터페이스를 통해 원활한 커뮤니케이션 
-      경험을 제공합니다.
+    서비스의 운영 효율을 극대화하기 위해 구축한 Next.js 14 기반의 백오피스 시스템입니다.
+운영진이 사용하는 내부 시스템인 만큼 '디자인'보다 '기능 구현의 속도'가 중요하다고 판단하여 Bootstrap을 도입해 UI 개발 시간을 단축했습니다. 이렇게 확보된 리소스를 대량 송장 엑셀 처리, 데이터 시각화, 주문 상태 관리 등 핵심 비즈니스 로직의 완성도를 높이는 데 집중했습니다.
     `,
-    preTags: ['React', 'Node.js', 'Socket.IO', 'Express', 'MongoDB'],
-    tags: ['React', 'Node.js', 'Socket.IO', 'Express', 'MongoDB'],
-    image: '/project1/cover_p1.png',
-    detailImages: ['/project2-detail1.png', '/project2-detail2.png'],
-    github: 'https://github.com/yourusername/realtime-chat',
-    liveUrl: 'https://your-chat-demo.com',
-    period: '2023.10 - 2023.12 (2개월)',
-    role: 'Full Stack Developer',
-    teamSize: '2명 (프론트엔드 1명, 백엔드 1명)',
+    preTags: ['Next.js', 'React', 'TypeScript', 'bootstrap SCSS', 'Emotion'],
+    tags: ['Next.js', 'React', 'Bootstrap SCSS', 'Emotion', 'TypeScript', 'React-query', 'React-to-Print', 'SheetJS'],
+    image: '/project2/dashboard_p2.png',
+    detailImages: ['/project2/dashboard_p2.png'],
+    github: 'https://github.com/MailMovers/mailtree_admin_frontend',
+    period: '2024.10 - 2025.6 (8개월)',
+    role: 'Frontend Developer',
+    teamSize: '팀 프로젝트 (풀스택 1명, 프론트엔드 1명, 백엔드 1명)',
+    contributionRate: 'Lead Frontend Developer (기여도 70% 이상)',
     contributions: [
-      '실시간 1:1 및 그룹 채팅',
-      '파일 및 이미지 공유 기능',
-      '사용자 온라인/오프라인 상태 표시',
-      '읽음/안읽음 메시지 표시',
-      '메시지 검색 기능',
-      '채팅방 생성 및 관리',
-      '이모지 반응 및 답장 기능',
+      'Bootstrap SCSS 도입으로 UI 개발 시간을 단축하고 핵심 비즈니스 로직 구현에 리소스 집중',
+      '실무자 협업을 통한 통합 작업 플로우 설계 (기존 3단계 공정을 단일 화면으로 압축하여 업무 효율 극대화)',
+      'React-to-Print 기반의 정밀 출력 시스템 구현 (화면과 실물 편지지의 1:1 대응)',
+      'SheetJS를 활용한 대용량 데이터 자동화 (일일 출고량 자동 산출 및 우표 데이터 일괄 업로드 처리)',
+      '운영 대시보드 구축 및 비즈니스 확장 대응 (매출 지표 시각화 및 추가 상품 기능 도입으로 매출 상승 기여)',
     ],
     challenges: [
       {
-        problem: '동시 접속자가 많을 때 서버 응답 지연 및 메시지 전송 실패',
+        problem:
+          '초기 도입한 Vite(SPA) 기반의 Bootstrap 템플릿이 Next.js(SSR) 환경과 빌드 설정 및 라우팅 방식이 달라 호환성 문제가 발생',
         solution:
-          'Socket.IO의 Room 기능과 Redis Adapter를 도입하여 수평 확장이 가능한 구조로 변경하고, 연결 풀링으로 동시 접속 처리 능력을 5배 향상',
+          'Vite와 Next.js의 번들링 차이를 분석하여 Next.js로 마이그레이션을 진행하고, use client 지시어를 적절히 활용해 클라이언트 전용 라이브러리를 Next.js 14 App Router 환경에 성공적으로 이식하여 개발 생산성을 확보함',
       },
       {
-        problem: '수천 개의 메시지를 렌더링할 때 스크롤 성능 저하',
-        solution:
-          'React Virtualized를 활용한 가상 스크롤 구현으로 DOM 노드 수를 제한하고, Intersection Observer API로 메시지 로딩 최적화하여 렌더링 성능 80% 개선',
+        problem:
+          '개발자가 설계한 로직과 현장 실무자의 실제 업무 패턴 간의 괴리로 인해, 기능은 동작하지만 업무 효율이 떨어지는 병목 현상 발견',
+        solution: `실무자의 작업 방식을 직접 관찰하며 기획 의도를 설득하는 동시에 피드백을 수용함. 실무 동선에 맞춘 UI 플로우로 전면 재설계하여, '개발된 기능'이 아닌 '쓰이는 기능'을 만드는 사용자 중심의 어드민을 완성함`,
       },
       {
-        problem: '네트워크 불안정으로 인한 메시지 유실 및 순서 보장 문제',
+        problem:
+          '주문 제작된 A5 변형 규격 편지지 사용으로 인해, 웹 화면과 실제 출력물의 줄바꿈/위치 오차가 발생하고 테스트 용지 낭비가 심함',
         solution:
-          '메시지 큐잉 시스템을 구현하여 오프라인 시 메시지를 로컬에 저장하고, 재연결 시 자동 재전송. 메시지 시퀀스 넘버를 활용해 순서 보장',
-      },
-      {
-        problem: '채팅 히스토리가 증가하면서 데이터베이스 조회 속도 저하',
-        solution:
-          'MongoDB의 인덱싱 전략을 최적화하고, 채팅방별 샤딩을 구현. 페이지네이션과 캐싱을 조합하여 평균 조회 시간을 500ms에서 50ms로 단축',
+          'CSS @media print와 @page 규칙을 활용해 커스텀 용지 규격을 코드로 정의하고, 화면상의 픽셀(px)을 실제 물리 단위(mm)와 1:1로 매칭하는 정밀 스타일링을 적용하여 출력 오차를 해결함',
       },
     ],
   },
   {
-    id: 2,
-    title: 'Real-time Chat App',
-    description:
-      'A full-stack chat application using Socket.IO for real-time messaging with a clean and dynamic user interface.',
+    id: 3,
+    title: 'Telegram Mini App Game (MVP)',
+    description: '2차원 배열 알고리즘 기반의 상태 관리와 모바일 인터랙션에 최적화된 웹 게임 프로토타입',
     detailedDescription: `
-      Socket.IO를 활용한 실시간 채팅 애플리케이션입니다. 
-      WebSocket 기술을 이용하여 지연 시간 없는 메시지 전송과 
-      실시간 사용자 상태 업데이트를 구현했습니다.
-      
-      Node.js와 Express를 백엔드로 사용하고, React로 구축한 
-      직관적인 사용자 인터페이스를 통해 원활한 커뮤니케이션 
-      경험을 제공합니다.
+      텔레그램 미니 앱(Telegram Mini App) 탑재를 목표로 기획된 채굴 게임의 웹 프로토타입(PoC)입니다.
+
+플랫폼 연동에 앞서 게임의 핵심 재미 요소(Core Loop)와 인터랙션 로직을 웹 환경에서 선행 검증하기 위해 개발했습니다. 5x5 그리드 내에서의 충돌 방지 알고리즘, 복잡한 게임 상태 관리, 그리고 모바일 터치 환경에 최적화된 UX를 구현하는 데 집중했습니다.
+
+단순한 기능 구현을 넘어, 제한된 모바일 화면에서 사용자 몰입도를 높이는 '인터랙티브 웹 애플리케이션'의 가능성을 확인한 프로젝트입니다.
     `,
-    preTags: ['React', 'Node.js', 'Socket.IO', 'Express', 'MongoDB'],
-    tags: ['React', 'Node.js', 'Socket.IO', 'Express', 'MongoDB'],
-    image: '/project1/cover_p1.png',
-    detailImages: ['/project2-detail1.png', '/project2-detail2.png'],
-    github: 'https://github.com/yourusername/realtime-chat',
-    liveUrl: 'https://your-chat-demo.com',
-    period: '2023.10 - 2023.12 (2개월)',
-    role: 'Full Stack Developer',
-    teamSize: '2명 (프론트엔드 1명, 백엔드 1명)',
+    preTags: ['Next.js', 'React', 'TypeScript', 'Emotion'],
+    tags: ['Next.js', 'React', 'TypeScript', 'Emotion'],
+    image: '/project3/main_p3.png',
+    detailImages: [
+      '/project3/main_p3.png',
+      '/project3/main2_p3.png',
+      '/project3/invite_p3.png',
+      '/project3/mission_p3.png',
+    ],
+    github: 'https://github.com/chowalcamp/miningGame',
+    liveUrl: 'https://mining-game-plum.vercel.app',
+    period: '2025.4.23 - 2025.4.23 (1일)',
+    role: 'Frontend Developer',
+    teamSize: '개인 프로젝트',
+    contributionRate: 'Main Frontend Developer (기여도 100%)',
     contributions: [
-      '실시간 1:1 및 그룹 채팅',
-      '파일 및 이미지 공유 기능',
-      '사용자 온라인/오프라인 상태 표시',
-      '읽음/안읽음 메시지 표시',
-      '메시지 검색 기능',
-      '채팅방 생성 및 관리',
-      '이모지 반응 및 답장 기능',
+      'Next.js 14 App Router와 TypeScript를 활용한 타입 안전한 게임 애플리케이션 설계',
+      '충돌 감지 알고리즘 및 보석 랜덤 배치 로직 구현',
+      'Emotion을 활용한 컴포넌트 기반 스타일링 및 keyframe 애니메이션 시스템 구축',
+      '5가지 독립적인 게임 상태(board, gems, coverMap, discoveredGemIds, score)의 효율적 관리',
+      '모바일 우선 반응형 디자인 (max-width: 430px) 및 터치 인터랙션 최적화',
+      '재사용 가능한 컴포넌트 라이브러리 구축 (cards, layout, gems)',
+      '게임 자동 리셋 및 점수 계산 시스템 구현',
     ],
     challenges: [
       {
-        problem: '동시 접속자가 많을 때 서버 응답 지연 및 메시지 전송 실패',
+        problem: '복잡한 다중 게임 상태 관리로 인한 렌더링 최적화 이슈',
         solution:
-          'Socket.IO의 Room 기능과 Redis Adapter를 도입하여 수평 확장이 가능한 구조로 변경하고, 연결 풀링으로 동시 접속 처리 능력을 5배 향상',
+          'React Hooks(useState, useEffect)를 활용하여 보드 상태, 보석 위치, 커버 맵, 발견된 보석 등 독립적인 상태를 분리 관리하고, 불변성을 유지한 상태 업데이트로 불필요한 리렌더링 방지',
       },
       {
-        problem: '수천 개의 메시지를 렌더링할 때 스크롤 성능 저하',
+        problem: '5x5 그리드에 다양한 크기의 보석을 겹치지 않게 배치하는 알고리즘 구현',
         solution:
-          'React Virtualized를 활용한 가상 스크롤 구현으로 DOM 노드 수를 제한하고, Intersection Observer API로 메시지 로딩 최적화하여 렌더링 성능 80% 개선',
+          '2D 배열 기반 충돌 감지 알고리즘을 구현하여 각 보석 배치 시 영역 검사를 수행하고, 최대 100회 재시도 로직으로 보드 생성 성공률 보장',
       },
       {
-        problem: '네트워크 불안정으로 인한 메시지 유실 및 순서 보장 문제',
+        problem: '클릭 시 즉각적인 피드백과 부드러운 애니메이션 구현',
         solution:
-          '메시지 큐잉 시스템을 구현하여 오프라인 시 메시지를 로컬에 저장하고, 재연결 시 자동 재전송. 메시지 시퀀스 넘버를 활용해 순서 보장',
-      },
-      {
-        problem: '채팅 히스토리가 증가하면서 데이터베이스 조회 속도 저하',
-        solution:
-          'MongoDB의 인덱싱 전략을 최적화하고, 채팅방별 샤딩을 구현. 페이지네이션과 캐싱을 조합하여 평균 조회 시간을 500ms에서 50ms로 단축',
-      },
-    ],
-  },
-  {
-    id: 2,
-    title: 'Real-time Chat App',
-    description:
-      'A full-stack chat application using Socket.IO for real-time messaging with a clean and dynamic user interface.',
-    detailedDescription: `
-      Socket.IO를 활용한 실시간 채팅 애플리케이션입니다. 
-      WebSocket 기술을 이용하여 지연 시간 없는 메시지 전송과 
-      실시간 사용자 상태 업데이트를 구현했습니다.
-      
-      Node.js와 Express를 백엔드로 사용하고, React로 구축한 
-      직관적인 사용자 인터페이스를 통해 원활한 커뮤니케이션 
-      경험을 제공합니다.
-    `,
-    preTags: ['React', 'Node.js', 'Socket.IO', 'Express', 'MongoDB'],
-    tags: ['React', 'Node.js', 'Socket.IO', 'Express', 'MongoDB'],
-    image: '/project1/cover_p1.png',
-    detailImages: ['/project2-detail1.png', '/project2-detail2.png'],
-    github: 'https://github.com/yourusername/realtime-chat',
-    liveUrl: 'https://your-chat-demo.com',
-    period: '2023.10 - 2023.12 (2개월)',
-    role: 'Full Stack Developer',
-    teamSize: '2명 (프론트엔드 1명, 백엔드 1명)',
-    contributions: [
-      '실시간 1:1 및 그룹 채팅',
-      '파일 및 이미지 공유 기능',
-      '사용자 온라인/오프라인 상태 표시',
-      '읽음/안읽음 메시지 표시',
-      '메시지 검색 기능',
-      '채팅방 생성 및 관리',
-      '이모지 반응 및 답장 기능',
-    ],
-    challenges: [
-      {
-        problem: '동시 접속자가 많을 때 서버 응답 지연 및 메시지 전송 실패',
-        solution:
-          'Socket.IO의 Room 기능과 Redis Adapter를 도입하여 수평 확장이 가능한 구조로 변경하고, 연결 풀링으로 동시 접속 처리 능력을 5배 향상',
-      },
-      {
-        problem: '수천 개의 메시지를 렌더링할 때 스크롤 성능 저하',
-        solution:
-          'React Virtualized를 활용한 가상 스크롤 구현으로 DOM 노드 수를 제한하고, Intersection Observer API로 메시지 로딩 최적화하여 렌더링 성능 80% 개선',
-      },
-      {
-        problem: '네트워크 불안정으로 인한 메시지 유실 및 순서 보장 문제',
-        solution:
-          '메시지 큐잉 시스템을 구현하여 오프라인 시 메시지를 로컬에 저장하고, 재연결 시 자동 재전송. 메시지 시퀀스 넘버를 활용해 순서 보장',
-      },
-      {
-        problem: '채팅 히스토리가 증가하면서 데이터베이스 조회 속도 저하',
-        solution:
-          'MongoDB의 인덱싱 전략을 최적화하고, 채팅방별 샤딩을 구현. 페이지네이션과 캐싱을 조합하여 평균 조회 시간을 500ms에서 50ms로 단축',
+          'Emotion keyframes와 CSS transform을 활용한 하드웨어 가속 애니메이션 구현으로 60fps 유지, setTimeout을 활용한 애니메이션 시퀀스 제어로 자연스러운 게임 플로우 구현',
       },
     ],
   },

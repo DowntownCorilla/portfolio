@@ -29,8 +29,8 @@ export default function About() {
               <span className={styles.highlight}>&apos;운영 시스템&apos;</span>에 집중합니다. 사용자 서비스뿐만 아니라
               운영진을 위한 <span className={styles.highlight}>어드민(Admin) 시스템</span>을 직접 기획하고 개발하며,
               &quot;개발은 결국 비즈니스 문제를 해결하는 도구&quot;라는 것을 체득했습니다. 또한, 팀의 목표를 위해서라면
-              어떤 난관이 있어도 <strong className={styles.highlight}>기어이 서비스를 런칭해내는 집요함(Grit)</strong>을
-              가지고 있습니다. AI 도구를 활용한 빠른 프로토타이핑과 검증된 실행력으로, 아이디어를 가장 확실한
+              어떤 난관이 있어도 <strong className={styles.highlight}>목표를 향해 나아가는 열정</strong>을 가지고
+              있습니다. AI 도구를 활용한 빠른 프로토타이핑과 검증된 실행력으로, 아이디어를 가장 확실한
               &apos;결과물&apos;로 만들어내는 개발자가 되겠습니다.
             </p>
           </div>
