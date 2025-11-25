@@ -44,13 +44,13 @@
 }
 
 .logoText {
-  color: #C9A77C;
+  color: #c9a77c;
   font-weight: 600;
   transition: color 0.3s;
 }
 
 .logo:hover .logoText {
-  color: #B8966B;
+  color: #b8966b;
 }
 
 .hoverProps {
@@ -96,11 +96,11 @@
 }
 
 .menuLink:hover {
-  color: #C9A77C;
+  color: #c9a77c;
 }
 
 .ctaButton {
-  background-color: #C9A77C;
+  background-color: #c9a77c;
   color: #000;
   padding: 0.5rem 1.5rem;
   border-radius: 0.5rem;
@@ -110,7 +110,7 @@
 }
 
 .ctaButton:hover {
-  background-color: #B8966B;
+  background-color: #b8966b;
 }
 
 /* 모바일 메뉴 버튼 */
@@ -153,12 +153,12 @@
 }
 
 .mobileMenuLink:hover {
-  color: #C9A77C;
+  color: #c9a77c;
 }
 
 .mobileCtaButton {
   display: block;
-  background-color: #C9A77C;
+  background-color: #c9a77c;
   color: #000;
   padding: 0.5rem 1.5rem;
   border-radius: 0.5rem;
@@ -169,6 +169,5 @@
 }
 
 .mobileCtaButton:hover {
-  background-color: #B8966B;
+  background-color: #b8966b;
 }
-

@@ -82,19 +82,25 @@ export default function ImageCarousel({
             transform: `translateX(-${currentIndex * 100}%)`,
           }}
         >
-          {images.map((img, index) => (
-            <div key={index} className={styles.carouselSlide}>
-              <Image
-                src={img}
-                alt={`${alt} - 이미지 ${index + 1}`}
-                width={fullscreen ? 1200 : 800}
-                height={fullscreen ? 675 : 450}
-                className={styles.carouselImage}
-                style={{ objectFit: fullscreen ? 'contain' : 'cover' }}
-                priority={index === 0}
-              />
-            </div>
-          ))}
+          {images.map((img, index) => {
+            // GIF 파일인지 확인 (애니메이션 이미지는 최적화 비활성화)
+            const isGif = img.toLowerCase().endsWith('.gif');
+            
+            return (
+              <div key={index} className={styles.carouselSlide}>
+                <Image
+                  src={img}
+                  alt={`${alt} - 이미지 ${index + 1}`}
+                  width={fullscreen ? 1200 : 800}
+                  height={fullscreen ? 675 : 450}
+                  className={styles.carouselImage}
+                  style={{ objectFit: fullscreen ? 'contain' : 'cover' }}
+                  priority={index === 0}
+                  unoptimized={isGif}
+                />
+              </div>
+            );
+          })}
         </div>
 
         {/* 좌우 네비게이션 버튼 */}

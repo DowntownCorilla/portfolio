@@ -177,6 +177,71 @@ export const projects: Project[] = [
       },
     ],
   },
+  {
+    id: 4,
+    title: 'Naver Blog Content Simulator (PoC)',
+    description:
+      'OpenAI API를 활용한 컨텐츠 생성, 네이버 블로그 디자인 요소(인용구, 구분선) 외부 구현 가능성 검증 및 커스텀 마크다운 엔진 개발',
+    detailedDescription: `
+      인턴쉽 중에, 네이버 블로그 관련 서비스를 연구하던 중, 네이버 블로그 사용자들의 번거로움을 줄이기 위한 기능을 연구하던 프로젝트 입니다.
+      네이버에서 블로그 자동 포스팅은 엄격하게 제제를 하고 있기 때문에, 이 프로젝트는 네이버 블로그 디자인 요소(인용구, 구분선) 외부 구현 가능성 검증을 목표로 하였습니다.
+      사용자는 주제만 정하고, 그에 맞는 글을 OpenAI API를 활용하여 자동으로 생성하고, 네이버 블로그 디자인 요소(인용구, 구분선)을 외부 구현하여 사용자가 쉽게 블로그 포스팅을 할 수 있도록 하였습니다.
+    `,
+    preTags: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'OpenAI API'],
+    tags: [
+      'Next.js',
+      'React',
+      'TypeScript',
+      'Tailwind CSS',
+      'CSS Modules',
+      'React-Query',
+      'OpenAI API',
+      'React-Markdown',
+      'React-Hook-Form',
+      'Playwright',
+    ],
+    image: '/project4/cover_p4.png',
+    detailImages: [
+      '/project4/cover_p4.png',
+      '/project4/template_p4.png',
+      '/project4/markdown_p4.png',
+      '/project4/gif_quote_p4.gif',
+      '/project4/gif_divider_p4.gif',
+      '/project4/gif_highlighter_p4.gif',
+    ],
+    github: 'https://github.com/DowntownCorilla/blog-posting-markdown',
+    liveUrl: 'https://blog-posting-markdown.vercel.app/',
+    period: '2025.9.09 - 2025.9.10 (2일)',
+    role: 'Frontend Developer',
+    teamSize: '개인 프로젝트',
+    contributionRate: 'Main Frontend Developer (기여도 100%)',
+    contributions: [
+      'Naver Editor UX 미러링을 위한 커스텀 마크다운 엔진 개발',
+      'OpenAI API를 활용하여 커스텀 마크다운 문법이 적용된 콘텐츠 생성 로직 구현',
+      'AI-Native Workflow(Full Vibe Coding) 도입 및 생산성 극대화',
+      '봇 탐지 정책 위반 방지를 위한 "Safe Copy" 프로세스 설계',
+    ],
+    challenges: [
+      {
+        problem:
+          'Client-Side에서 OpenAI API 직접 호출 시 API Key 및 프롬프트 로직이 네트워크 탭에 노출되는 보안 취약점 발생',
+        solution:
+          'Next.js 서버사이드 API Route를 활용하여 클라이언트와 OpenAI 간의 직접 통신을 차단하고, API Key와 프롬프트 로직이 브라우저에 노출되지 않도록 보안을 강화함',
+      },
+      {
+        problem:
+          'LLM의 환각(Hallucination) 현상으로 인해 개발자가 정의한 커스텀 문법을 무시하거나 표준 마크다운과 혼용하여 렌더링 오류 발생',
+        solution:
+          'System Prompt Engineering을 적용하여 페르소나 부여, 강력한 제약 조건(Constraints) 주입, Few-Shot 예시 제공을 통해 AI의 출력을 엄격하게 통제하고 문법 준수율을 확보함',
+      },
+      {
+        problem:
+          '네이버 블로그 고유의 디자인 요소(다양한 스타일의 인용구, 구분선 등)는 표준 마크다운 문법으로는 표현이 불가능하며, AI에게 복잡한 HTML/CSS 코드를 직접 생성하게 할 경우 토큰 낭비 및 구조적 오류의 발생 위험이 큼',
+        solution:
+          'AI가 생성하기 쉽고 명확한 독자적인 커스텀 마크다운 문법(:::quote-type:::)을 설계하여 토큰 효율성을 높이고, 프론트엔드에서 이를 해석하여 디자인 컴포넌트로 매핑하는 정규식 기반 커스텀 파서를 직접 개발하여 렌더링 안정성을 확보함',
+      },
+    ],
+  },
 ];
 
 // 특정 프로젝트 가져오기 헬퍼 함수
