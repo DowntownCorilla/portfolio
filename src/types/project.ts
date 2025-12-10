@@ -25,6 +25,8 @@ export interface Project {
   github: string;
   // 라이브 데모 URL (선택사항)
   liveUrl?: string;
+  // 라이브 URL에 대한 추가 설명 또는 공지 (예: Figma 프로토타입, 데모 버전 등)
+  liveUrlNote?: string;
   // 프로젝트 기간
   period?: string;
   // 주요 기여 및 담당 업무 목록

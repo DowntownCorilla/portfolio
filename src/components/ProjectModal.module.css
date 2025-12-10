@@ -12,6 +12,8 @@
   z-index: 1000;
   padding: 1rem;
   animation: fadeIn 0.2s ease-in-out;
+  overflow-y: auto; /* 오버레이에서 스크롤 가능 */
+  overscroll-behavior: contain; /* 스크롤 전파 방지 */
 }
 
 @keyframes fadeIn {
@@ -35,6 +37,7 @@
   animation: slideUp 0.3s ease-out;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
   border: 1px solid rgba(201, 167, 124, 0.2);
+  overscroll-behavior: contain; /* 스크롤 전파 방지 */
 }
 
 @keyframes slideUp {
@@ -391,14 +394,18 @@
   white-space: pre-line;
 }
 
+/* 링크 섹션 전체 컨테이너 */
+.linksSection {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 /* 링크 버튼들 */
 .links {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  margin-top: 2rem;
-  padding-top: 2rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .linkButton {
@@ -430,6 +437,18 @@
 .liveButton:hover {
   background: #b8966b;
   box-shadow: 0 4px 12px rgba(201, 167, 124, 0.5);
+}
+
+/* Live URL 공지 메시지 */
+.liveUrlNote {
+  margin: 1rem 0 0 0;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.85rem;
+  color: #ffd700;
+  background: rgba(255, 215, 0, 0.1);
+  border-left: 3px solid #ffd700;
+  border-radius: 0.25rem;
+  line-height: 1.4;
 }
 
 /* 반응형 디자인 */
@@ -475,6 +494,11 @@
     gap: 0.75rem;
   }
 
+  .linksSection {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+  }
+
   .links {
     flex-direction: column;
   }
@@ -482,6 +506,12 @@
   .linkButton {
     width: 100%;
     justify-content: center;
+  }
+
+  .liveUrlNote {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.6rem;
+    margin-top: 0.75rem;
   }
 
   .challengeItem {

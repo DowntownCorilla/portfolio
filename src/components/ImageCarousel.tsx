@@ -85,7 +85,7 @@ export default function ImageCarousel({
           {images.map((img, index) => {
             // GIF 파일인지 확인 (애니메이션 이미지는 최적화 비활성화)
             const isGif = img.toLowerCase().endsWith('.gif');
-            
+
             return (
               <div key={index} className={styles.carouselSlide}>
                 <Image
@@ -137,9 +137,7 @@ export default function ImageCarousel({
           {images.map((_, index) => (
             <button
               key={index}
-              className={`${styles.carouselDot} ${
-                index === currentIndex ? styles.carouselDotActive : ''
-              }`}
+              className={`${styles.carouselDot} ${index === currentIndex ? styles.carouselDotActive : ''}`}
               onClick={(e) => handleDotClick(index, e)}
               aria-label={`이미지 ${index + 1}로 이동`}
             />
@@ -149,4 +147,3 @@ export default function ImageCarousel({
     </div>
   );
 }
-

@@ -40,7 +40,7 @@ export const projects: Project[] = [
     period: '2024.08 - 2025.06 (10개월)',
     role: 'Frontend Developer',
     teamSize: '팀 프로젝트 (풀스택 1명, 프론트엔드 1명, 백엔드 2명)',
-    contributionRate: 'Main Frontend Developer (기여도 60% 이상)',
+    contributionRate: 'Frontend Developer (기여도 40%)',
     // 주요 기여 및 담당 업무
     contributions: [
       '상품 목록/상세, 메인 홈 화면 등 핵심 사용자 화면 고도화 진행',
@@ -66,16 +66,16 @@ export const projects: Project[] = [
       {
         problem: 'iOS에서 PNG 포맷 이미지 등록 실패 및 호환성 문제',
         solution:
-          'User Agent로 iOS 환경을 감지(isIOS)하여, iOS일 때만 압축 효율이 좋은 image/jpeg (품질 0.9) 포맷으로 변환(toDataURL)하고 Blob으로 재가공하여 업로드 안정성 확보',
+          'User Agent로 iOS 환경을 감지하여, iOS일 때만 압축 효율이 좋은 image/jpeg (품질 0.9) 포맷으로 변환하고 Blob으로 재가공하여 업로드 안정성 확보',
       },
       {
         problem: '결제 프로세스의 복잡한 상태 관리 최적화 (Props Drilling 해결)',
         solution: `1. 상태 분리 전략: 페이지 내에서만 일시적으로 쓰이는 UI 상태(모달 Open 여부 등)는 Custom Hook(useModal)으로 분리하여 로직을 캡슐화.
-                   2. 전역 상태 도입: 여러 컴포넌트 깊숙이 전달되어야 하거나 다른 페이지(주소록 모달 등)와 공유해야 하는 데이터(주소 정보, 선택한 우표 등)는 Recoil Atom(selectedSenderAddressDataState 등)으로 전역 관리하여 Props 전달 없이 필요한 컴포넌트에서 직접 구독하여 사용하도록 리팩토링.`,
+                   2. 전역 상태 도입: 여러 컴포넌트 깊숙이 전달되어야 하거나 다른 페이지(주소록 모달 등)와 공유해야 하는 데이터(주소 정보, 선택한 우표 등)는 Recoil Atom으로 전역 관리하여 Props 전달 없이 필요한 컴포넌트에서 직접 구독하여 사용하도록 리팩토링.`,
       },
       {
         problem: '소셜 로그인 연동 시 인증 플로우 문제 발생',
-        solution: `초기에는 클라이언트(프론트)에서 소셜 로그인 SDK로 직접 인증 코드를 받아 백엔드로 전달하려 했으나, 인가 코드(Authorization Code)만으로는 회원가입 여부 확인 및 JWT 토큰 발급이 불가능함을 인지함.
+        solution: `초기에는 클라이언트(프론트)에서 소셜 로그인 SDK로 직접 인증 코드를 받아 백엔드로 전달하려 했으나, 인가 코드만으로는 회원가입 여부 확인 및 JWT 토큰 발급이 불가능함을 인지함.
                    프론트엔드는 "로그인 요청"만 보내고, 실제 인증/회원가입/토큰 발급은 백엔드에서 처리한 후 리다이렉트 URL을 통해 결과(토큰)만 프론트로 전달받는 방식으로 플로우 재설계.`,
       },
     ],
@@ -96,7 +96,7 @@ export const projects: Project[] = [
     period: '2024.10 - 2025.6 (8개월)',
     role: 'Frontend Developer',
     teamSize: '팀 프로젝트 (풀스택 1명, 프론트엔드 1명, 백엔드 1명)',
-    contributionRate: 'Lead Frontend Developer (기여도 70% 이상)',
+    contributionRate: 'Frontend Developer (기여도 50%)',
     contributions: [
       'Bootstrap SCSS 도입으로 UI 개발 시간을 단축하고 핵심 비즈니스 로직 구현에 리소스 집중',
       '실무자 협업을 통한 통합 작업 플로우 설계 (기존 3단계 공정을 단일 화면으로 압축하여 업무 효율 극대화)',
@@ -149,7 +149,7 @@ export const projects: Project[] = [
     period: '2025.4.23 - 2025.4.23 (1일)',
     role: 'Frontend Developer',
     teamSize: '개인 프로젝트',
-    contributionRate: 'Main Frontend Developer (기여도 100%)',
+    contributionRate: 'Frontend Developer (기여도 100%)',
     contributions: [
       'Next.js 14 App Router와 TypeScript를 활용한 타입 안전한 게임 애플리케이션 설계',
       '충돌 감지 알고리즘 및 보석 랜덤 배치 로직 구현',
@@ -214,7 +214,7 @@ export const projects: Project[] = [
     period: '2025.9.09 - 2025.9.10 (2일)',
     role: 'Frontend Developer',
     teamSize: '개인 프로젝트',
-    contributionRate: 'Main Frontend Developer (기여도 100%)',
+    contributionRate: 'Frontend Developer (기여도 100%)',
     contributions: [
       'Naver Editor UX 미러링을 위한 커스텀 마크다운 엔진 개발',
       'OpenAI API를 활용하여 커스텀 마크다운 문법이 적용된 콘텐츠 생성 로직 구현',
@@ -239,6 +239,64 @@ export const projects: Project[] = [
           '네이버 블로그 고유의 디자인 요소(다양한 스타일의 인용구, 구분선 등)는 표준 마크다운 문법으로는 표현이 불가능하며, AI에게 복잡한 HTML/CSS 코드를 직접 생성하게 할 경우 토큰 낭비 및 구조적 오류의 발생 위험이 큼',
         solution:
           'AI가 생성하기 쉽고 명확한 독자적인 커스텀 마크다운 문법(:::quote-type:::)을 설계하여 토큰 효율성을 높이고, 프론트엔드에서 이를 해석하여 디자인 컴포넌트로 매핑하는 정규식 기반 커스텀 파서를 직접 개발하여 렌더링 안정성을 확보함',
+      },
+    ],
+  },
+  {
+    id: 5,
+    title: '플랜 A - AI 최적화 웨딩 플래너',
+    description: '2025 새싹 해커톤 출전작: 사용자의 결정 피로감을 줄이는 AI 웨딩 플래너 앱',
+    detailedDescription: `
+      사용자의 정보를 입력받아, 스튜디오, 드레스, 메이크업, 웨딩홀 의 최적 조합을 추천하는 AI 웨딩 플래너 앱 입니다. 
+      기존 사용자의 '결정 피로감'을 줄이기 위해 최적의 플랜A를 추천해주고, 필터링된 데이터를 제공함으로써 사용자가 원하는 플랜을 쉽게 조립할 수 있습니다.
+    `,
+    preTags: ['NestJS', 'PostgreSQL', 'TypeORM', 'JWT', 'OpenAI API'],
+    tags: ['NestJS', 'PostgreSQL', 'TypeORM', 'JWT', 'OpenAI API', 'LangChain'],
+    image: '/project5/cover_p5.png',
+    detailImages: [
+      '/project5/cover_p5.png',
+      '/project5/research_p5.png',
+      '/project5/example_p5.png',
+      '/project5/future_p5.png',
+      '/project5/apis_p5.png',
+    ],
+    github: 'https://github.com/dacon-winner/planA',
+    liveUrl: 'https://view-glory-27028433.figma.site/',
+    liveUrlNote: '⚠️ Figma 디자인 프로토타입만 확인 가능합니다',
+    period: '2025.11.26 - 2025.12.02 (7일)',
+    role: 'Backend Developer',
+    teamSize: '팀 프로젝트 (풀스택 1명, 프론트엔드 2명, 백엔드 1명)',
+    contributionRate: 'Backend Developer (기여도 30%)',
+    contributions: [
+      'DB 스키마 재설계 및 TypeORM 마이그레이션 구현',
+      '21개의 RESTful API 엔드포인트 설계 및 구현',
+      'RAG 패턴 기반 AI 추천 엔진 구현',
+      'LangChain + OpenAI 기반 AI 추천 시스템 개발 (SSE 스트리밍)',
+      'Swagger를 활용한 완벽한 API 문서화',
+      '복잡한 비즈니스 규칙 구현 (예약-업체 연동, Soft Delete 등)',
+    ],
+    challenges: [
+      {
+        problem:
+          '초기 설계에서 사용자가 하나의 플랜만 가질 수 있는 구조로 설계되어 있어, 사용자가 여러 플랜을 가질 수 있도록 기획 변경 시 데이터 구조 재설계가 필요함',
+        solution:
+          '기존 사용자(USER)에 사용자 입력정보가 포함되어있어, 플랜(PLAN)과 1:1 관계가 성립함, 이를 분리하기 위해 사용자 입력 정보 테이블(USERS_INFO)을 추가하여 사용자와 플랜을 1:N 관계로, 사용자 입력 정보를 플랜과 1:1 관계로 연결하여 변경함. 이를 통해 사용자는 여러 플랜을 비교해보고, 최적의 플랜을 고르기 위해 편집과, 비교플랜 생성을 자유롭게 할 수 있게 됨',
+      },
+      {
+        problem: '초기단계에 적은 데이터와, 적은 리소스로 유지가 가능한 AI 인프라 구축이 필요함.',
+        solution:
+          'DB에서 사용자 조건에 맞는 업체들을 각 업종별로 10개씩 선정해 AI 컨텍스트에 포함하는 RAG 패턴 기반 AI 추천 엔진 구현으로 초기 데이터 규모 제한 속에서도 실시간 추천 성능 유지함. AI 로직 한번에 약 0.4원 정도의 비용이 소모됨',
+      },
+      {
+        problem:
+          '어플 특성상 긴 시간을 기다리는 것은 사용자 이탈 우려가 있음, AI 제너레이팅시, 중간 중간 진행 상황을 사용자에게 제공해야 함',
+        solution:
+          'Server-Sent Events(SSE) + LangChain 스트리밍 적용. AsyncGenerator로 AI 응답 청크를 실시간 전송하여 진행 상황 단계별 제공힘',
+      },
+      {
+        problem: '플랜 삭제 시 관련 예약/통계 데이터 손실 우려',
+        solution:
+          'deleted_at 컬럼을 사용한 Soft Delete 방식 채택으로 이후 서비스 진행시, 예약은 되어있는데, 플랜이 사라져서 관련 예약이 손실되는 경우를 방지함',
       },
     ],
   },

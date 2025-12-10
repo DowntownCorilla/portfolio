@@ -30,7 +30,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
     setIsImageModalOpen(false);
   };
 
-  // ESC 키로 모달 닫기
+  // ESC 키로 모달 닫기 및 body 스크롤 제어
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && !isImageModalOpen) {
@@ -40,13 +40,20 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
 
     if (isOpen) {
       document.addEventListener('keydown', handleEscape);
-      // 모달이 열릴 때 body 스크롤 방지
-      document.body.style.overflow = 'hidden';
+
+      // 스크롤바 너비 계산 (레이아웃 시프트 방지)
+      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+      document.documentElement.style.setProperty('--scrollbar-width', `${scrollbarWidth}px`);
+
+      // body 스크롤 방지
+      document.body.classList.add('no-scroll');
     }
 
     return () => {
       document.removeEventListener('keydown', handleEscape);
-      document.body.style.overflow = 'unset';
+      // body 스크롤 복원
+      document.body.classList.remove('no-scroll');
+      document.documentElement.style.removeProperty('--scrollbar-width');
     };
   }, [isOpen, isImageModalOpen, onClose]);
 
@@ -151,22 +158,25 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
           )}
 
           {/* 링크 버튼들 */}
-          <div className={styles.links}>
-            <a href={project.github} target="_blank" rel="noopener noreferrer" className={styles.linkButton}>
-              <FaGithub />
-              <span>GitHub Repository</span>
-            </a>
-            {project.liveUrl && (
-              <a
-                href={project.liveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`${styles.linkButton} ${styles.liveButton}`}
-              >
-                <FaExternalLinkAlt />
-                <span>Live Demo</span>
+          <div className={styles.linksSection}>
+            <div className={styles.links}>
+              <a href={project.github} target="_blank" rel="noopener noreferrer" className={styles.linkButton}>
+                <FaGithub />
+                <span>GitHub Repository</span>
               </a>
-            )}
+              {project.liveUrl && (
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`${styles.linkButton} ${styles.liveButton}`}
+                >
+                  <FaExternalLinkAlt />
+                  <span>Live Demo</span>
+                </a>
+              )}
+            </div>
+            {project.liveUrlNote && <p className={styles.liveUrlNote}>{project.liveUrlNote}</p>}
           </div>
         </div>
       </div>
