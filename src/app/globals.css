@@ -23,6 +23,45 @@ body {
   overflow-x: hidden;
   /* 스크롤바를 항상 표시하여 레이아웃 시프트 방지 */
   overflow-y: scroll;
+  position: relative;
+}
+
+/* 애니메이션 그라디언트 배경 - 전역 효과 */
+body::before {
+  content: '';
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 20% 50%, rgba(201, 167, 124, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(201, 167, 124, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at 40% 20%, rgba(201, 167, 124, 0.04) 0%, transparent 50%);
+  animation: gradientMove 20s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes gradientMove {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(5%, 5%);
+  }
+  50% {
+    transform: translate(-3%, 3%);
+  }
+  75% {
+    transform: translate(3%, -5%);
+  }
+}
+
+/* 모든 섹션에 z-index 추가하여 배경 위에 표시 */
+body > * {
+  position: relative;
+  z-index: 1;
 }
 
 /* 모달이 열렸을 때 body 스크롤 방지 */

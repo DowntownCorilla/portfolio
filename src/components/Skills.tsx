@@ -19,9 +19,12 @@ import { TbBeta } from 'react-icons/tb';
 
 import LogoLoop from './LogoLoop';
 import styles from './Skills.module.css';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 // Skills 섹션 - 기술 스택 무한 루프 애니메이션
 export default function Skills() {
+  // 스크롤 애니메이션 훅 사용
+  const { elementRef, isVisible } = useScrollAnimation({ threshold: 0.2 });
   // 기술 스택 데이터 - 각 기술의 공식 브랜드 색상 적용
   const skills = [
     { name: 'Next.js', icon: SiNextdotjs, color: '#FFFFFF' },
@@ -57,21 +60,26 @@ export default function Skills() {
   });
 
   return (
-    <section id="skills" className={styles.skills}>
+    <section id="skills" className={styles.skills} ref={elementRef}>
       <div className={styles.container}>
-        <h2 className={styles.title}>My Skills</h2>
+        <h2 className={`${styles.title} ${isVisible ? styles.fadeInUp : ''}`}>My Skills</h2>
 
         {/* react-bits LogoLoop 컴포넌트 사용 */}
-        <LogoLoop
-          logos={logoItems}
-          speed={60}
-          direction="left"
-          logoHeight={80}
-          gap={32}
-          pauseOnHover
-          ariaLabel="기술 스택"
-        />
+        <div className={`${styles.logoWrapper} ${isVisible ? styles.fadeIn : ''}`}>
+          <LogoLoop
+            logos={logoItems}
+            speed={60}
+            direction="left"
+            logoHeight={80}
+            gap={32}
+            pauseOnHover
+            ariaLabel="기술 스택"
+          />
+        </div>
       </div>
+
+      {/* 배경 그라디언트 효과 */}
+      <div className={styles.backgroundGradient}></div>
     </section>
   );
 }

@@ -13,6 +13,24 @@
 .formWrapper {
   max-width: 42rem;
   margin: 0 auto;
+  transform: translateY(30px);
+  opacity: 0;
+  animation: none;
+}
+
+.formWrapper.visible {
+  animation: formFadeInUp 0.8s ease-out forwards;
+}
+
+@keyframes formFadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* 헤더 */
@@ -66,7 +84,7 @@
   border-radius: 0.5rem;
   padding: 0.75rem 1rem;
   color: white;
-  transition: border-color 0.3s;
+  transition: all 0.3s ease;
 }
 
 .input::placeholder,
@@ -77,7 +95,9 @@
 .input:focus,
 .textarea:focus {
   outline: none;
-  border-color: #C9A77C;
+  border-color: #c9a77c;
+  box-shadow: 0 0 0 3px rgba(201, 167, 124, 0.1);
+  transform: translateY(-2px);
 }
 
 .textarea {
@@ -87,19 +107,34 @@
 
 .submitButton {
   width: 100%;
-  background-color: #C9A77C;
+  background-color: #c9a77c;
   color: #000;
   padding: 1rem 2rem;
   border-radius: 0.5rem;
   font-weight: 600;
-  transition: all 0.3s;
+  transition: all 0.3s ease;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
   border: none;
   cursor: pointer;
 }
 
 .submitButton:hover {
-  background-color: #B8966B;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 20px 25px -5px rgba(201, 167, 124, 0.4);
+  transform: translateY(-3px);
 }
 
+.submitButton:active {
+  transform: translateY(-1px) scale(0.98);
+  box-shadow: 0 5px 10px -3px rgba(0, 0, 0, 0.1);
+}
+
+.submitButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.submitButton:disabled:hover {
+  transform: none;
+  background-color: #c9a77c;
+}

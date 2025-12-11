@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import styles from './Contact.module.css';
 import Toast from './Toast';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 // 토스트 메시지 타입 정의
 interface ToastMessage {
@@ -19,6 +20,9 @@ export default function Contact() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [toast, setToast] = useState<ToastMessage | null>(null);
+
+  // 스크롤 애니메이션 훅 사용
+  const { elementRef, isVisible } = useScrollAnimation({ threshold: 0.2 });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -75,14 +79,18 @@ export default function Contact() {
       {/* 토스트 알림 */}
       {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
 
-      <section id="contact" className={styles.contact}>
+      <section id="contact" className={styles.contact} ref={elementRef}>
         <div className={styles.container}>
-          <div className={styles.formWrapper}>
+          <div className={`${styles.formWrapper} ${isVisible ? styles.visible : ''}`}>
             {/* 섹션 헤더 */}
             <div className={styles.header}>
               <h2 className={styles.title}>Get In Touch</h2>
               <p className={styles.subtitle}>
-                I&apos;m always open to discussing new projects or partnership opportunities. Feel free to reach out!
+                함께 고민하고 해결해 나가는 과정을 좋아합니다.
+                <br />
+                재미있는 아이디어가 있거나 함께할 동료를 찾고 계시다면 편하게 연락 주세요.
+                <br />
+                보내주신 메시지는 24시간 이내에 확인하고 답변드리겠습니다.
               </p>
             </div>
 

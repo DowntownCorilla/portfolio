@@ -3,6 +3,32 @@
   padding: 3rem 0;
   background-color: #0f0f0f;
   overflow: hidden;
+  position: relative;
+}
+
+/* 배경 그라디언트 효과 */
+.backgroundGradient {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(201, 167, 124, 0.1) 0%, transparent 70%);
+  pointer-events: none;
+  animation: gradientPulse 4s ease-in-out infinite;
+}
+
+@keyframes gradientPulse {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
 }
 
 .container {
@@ -10,6 +36,27 @@
   margin: 0 auto;
   padding: 0 1.5rem;
   overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+/* 로고 래퍼 */
+.logoWrapper {
+  opacity: 0;
+  animation: none;
+}
+
+.logoWrapper.fadeIn {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .title {
@@ -17,6 +64,24 @@
   font-weight: bold;
   color: white;
   margin-bottom: 2rem;
+  transform: translateY(30px);
+  opacity: 0;
+  animation: none;
+}
+
+.title.fadeInUp {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (min-width: 768px) {

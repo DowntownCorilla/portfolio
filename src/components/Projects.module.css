@@ -15,6 +15,24 @@
   font-weight: bold;
   color: white;
   margin-bottom: 3rem;
+  transform: translateY(30px);
+  opacity: 0;
+  animation: none;
+}
+
+.title.fadeInUp {
+  animation: titleFadeInUp 0.8s ease-out forwards;
+}
+
+@keyframes titleFadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (min-width: 768px) {
@@ -43,12 +61,30 @@
   transition: all 0.3s;
   cursor: pointer;
   outline: none;
+  transform: translateY(30px);
+  opacity: 0;
+  animation: none;
+}
+
+.projectCard.fadeInUp {
+  animation: cardFadeInUp 0.8s ease-out forwards;
+}
+
+@keyframes cardFadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .projectCard:hover {
   border-color: rgba(201, 167, 124, 0.5);
-  transform: translateY(-0.5rem);
-  box-shadow: 0 10px 30px rgba(201, 167, 124, 0.2);
+  transform: translateY(-0.5rem) scale(1.02);
+  box-shadow: 0 20px 40px rgba(201, 167, 124, 0.3);
 }
 
 .projectCard:focus-visible {
@@ -78,21 +114,13 @@
 .imageOverlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.2),
-    rgba(0, 0, 0, 0.6)
-  );
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.6));
   z-index: 1;
   transition: background 0.3s ease;
 }
 
 .projectCard:hover .imageOverlay {
-  background: linear-gradient(
-    to bottom,
-    rgba(201, 167, 124, 0.2),
-    rgba(201, 167, 124, 0.4)
-  );
+  background: linear-gradient(to bottom, rgba(201, 167, 124, 0.2), rgba(201, 167, 124, 0.4));
 }
 
 .imagePlaceholder {
@@ -118,7 +146,7 @@
 }
 
 .projectCard:hover .projectTitle {
-  color: #C9A77C;
+  color: #c9a77c;
 }
 
 .description {
@@ -135,7 +163,7 @@
 
 .tag {
   background-color: #0f0f0f;
-  color: #C9A77C;
+  color: #c9a77c;
   padding: 0.25rem 0.75rem;
   border-radius: 9999px;
   font-size: 0.875rem;
@@ -157,10 +185,14 @@
 }
 
 .githubLink:hover {
-  color: #C9A77C;
+  color: #c9a77c;
 }
 
 .githubIcon {
   font-size: 1.25rem;
+  transition: transform 0.3s ease;
 }
 
+.githubLink:hover .githubIcon {
+  transform: rotate(360deg);
+}

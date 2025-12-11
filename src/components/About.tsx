@@ -1,16 +1,22 @@
+'use client';
+
 import Image from 'next/image';
 import styles from './About.module.css';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 // About Me 섹션 - 자기소개
 export default function About() {
+  // 스크롤 애니메이션 훅 사용
+  const { elementRef, isVisible } = useScrollAnimation({ threshold: 0.2 });
+
   return (
-    <section id="about" className={styles.about}>
+    <section id="about" className={styles.about} ref={elementRef}>
       <div className={styles.container}>
-        <h2 className={styles.title}>About Me</h2>
+        <h2 className={`${styles.title} ${isVisible ? styles.fadeInUp : ''}`}>About Me</h2>
 
         <div className={styles.grid}>
           {/* 프로필 이미지 */}
-          <div className={styles.imageContainer}>
+          <div className={`${styles.imageContainer} ${isVisible ? styles.scaleIn : ''}`}>
             <div className={styles.imageBackground}></div>
             <div className={styles.imageWrapper}>
               <Image src="/Corilla.png" alt="Corilla (이윤재) 프로필 사진" fill className={styles.profileImage} />
@@ -18,7 +24,7 @@ export default function About() {
           </div>
 
           {/* 설명 텍스트 */}
-          <div className={styles.content}>
+          <div className={`${styles.content} ${isVisible ? styles.fadeIn : ''}`}>
             <h3 className={styles.subtitle}>
               안녕하세요, 화면 뒤의 <span className={styles.highlight}>&apos;비즈니스 흐름&apos;</span>까지 설계하는
               개발자 <span className={styles.highlight}>이윤재</span>입니다.

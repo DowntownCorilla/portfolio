@@ -7,6 +7,7 @@ import styles from './Projects.module.css';
 import { projects } from '@/data/projects';
 import { Project } from '@/types/project';
 import ProjectModal from './ProjectModal';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 // Projects 섹션 - 프로젝트 갤러리
 // 프로젝트 데이터는 src/data/projects.ts에서 관리됩니다
@@ -14,6 +15,9 @@ export default function Projects() {
   // 모달 상태 관리
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // 스크롤 애니메이션 훅 사용
+  const { elementRef, isVisible } = useScrollAnimation({ threshold: 0.1 });
 
   // 프로젝트 카드 클릭 핸들러
   const handleProjectClick = (project: Project) => {
@@ -29,16 +33,17 @@ export default function Projects() {
   };
 
   return (
-    <section id="projects" className={styles.projects}>
+    <section id="projects" className={styles.projects} ref={elementRef}>
       <div className={styles.container}>
-        <h2 className={styles.title}>Featured Projects</h2>
+        <h2 className={`${styles.title} ${isVisible ? styles.fadeInUp : ''}`}>Featured Projects</h2>
 
         {/* 프로젝트 그리드 */}
         <div className={styles.grid}>
-          {projects.map((project) => (
+          {projects.map((project, index) => (
             <div
               key={project.id}
-              className={styles.projectCard}
+              className={`${styles.projectCard} ${isVisible ? styles.fadeInUp : ''}`}
+              style={{ animationDelay: `${index * 0.15}s` }}
               onClick={() => handleProjectClick(project)}
               role="button"
               tabIndex={0}
