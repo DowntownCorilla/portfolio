@@ -1,94 +1,100 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { HiMenu, HiX } from 'react-icons/hi';
-import styles from './Header.module.css';
+import { useState } from "react";
+import { motion } from "motion/react";
 
-// 헤더 컴포넌트 - 네비게이션과 로고 포함
-export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+export function Header() {
+  const [isHovered, setIsHovered] = useState(false);
 
-  // 스크롤 이벤트 핸들러
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
+  const handleLogoClick = () => {
+    window.location.reload();
+  };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const scrollToSection = (sectionId: string) => {
+    const wrapper = document.querySelector(".horizontal-scroll-wrapper");
+    if (!wrapper) return;
 
-  // 네비게이션 메뉴 항목들
-  const menuItems = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Projects', href: '#projects' },
-  ];
+    const target = document.getElementById(sectionId);
+    if (target) {
+      const wrapperRect = wrapper.getBoundingClientRect();
+      const targetRect = target.getBoundingClientRect();
+      const left = targetRect.left - wrapperRect.left + wrapper.scrollLeft;
+      wrapper.scrollTo({
+        left,
+        behavior: "smooth",
+      });
+      return;
+    }
+
+    const sections = ["hero", "projects", "contact"];
+    const sectionIndex = sections.indexOf(sectionId);
+    if (sectionIndex !== -1) {
+      wrapper.scrollTo({
+        left: sectionIndex * window.innerWidth,
+        behavior: "smooth",
+      });
+    }
+  };
 
   return (
-    <header className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}>
-      <nav className={styles.nav}>
-        <div className={styles.navContent}>
-          {/* 로고 - 코드 스타일 */}
-          <button onClick={() => window.location.reload()} className={styles.logo}>
-            <span className={styles.tagBracket}>&lt;</span>
-            <span className={styles.logoText}>Corilla</span>
-            {/* onClick={reload} 부분 - 호버 시 나타남 */}
-            <span className={styles.hoverProps}>
-              &nbsp;
-              <span className={styles.propName}>onClick</span>
-              <span className={styles.tagBracket}>=</span>
-              <span className={styles.propValue}>
-                {'{'}reload{'}'}
-              </span>
-            </span>
-            {/* 닫는 태그 - 항상 표시 */}
-            <span className={styles.tagBracket}>&nbsp;/&gt;</span>
-          </button>
+    <header className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-sm border-b-2 border-[#c9a77c]/30">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 py-3 md:py-4 flex items-center justify-between">
+        <motion.div
+          className="relative cursor-pointer font-mono text-s md:text-sm select-none font-semibold"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          onClick={handleLogoClick}
+        >
+          <div className="flex items-center">
+            <span className="text-[#c9a77c]/60 font-semibold">&lt;</span>
+            <span className="text-[#c9a77c] font-semibold">Corilla</span>
 
-          {/* 데스크톱 메뉴 */}
-          <div className={styles.desktopMenu}>
-            {menuItems.map((item) => (
-              <a key={item.name} href={item.href} className={styles.menuLink}>
-                {item.name}
-              </a>
-            ))}
-            <a href="#contact" className={styles.ctaButton}>
-              Get In Touch
-            </a>
+            {/* Space before onClick - only visible when hovered */}
+            {isHovered && <span className="font-semibold"> </span>}
+
+            {/* onClick text that gets revealed character by character */}
+            <motion.span
+              className="text-s md:text-sm overflow-hidden inline-block whitespace-nowrap font-semibold"
+              initial={{ width: 0 }}
+              animate={{
+                width: isHovered ? "auto" : 0,
+              }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              style={{ minWidth: 0 }}
+            >
+              <span className="text-[#61afef] ml-2">onClick</span>
+              <span className="text-white/70">=</span>
+              <span className="text-[#e5c07b] mr-2">&#123;reload&#125;</span>
+            </motion.span>
+
+            {/* Space after onClick - only visible when hovered */}
+            {isHovered && <span className="font-semibold"> </span>}
+
+            <span className="text-[#c9a77c] font-semibold">/&gt;</span>
           </div>
+        </motion.div>
 
-          {/* 모바일 메뉴 버튼 */}
+        <nav className="flex gap-3 md:gap-6 lg:gap-8">
           <button
-            className={styles.mobileMenuButton}
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Toggle menu"
+            onClick={() => scrollToSection("hero")}
+            className="text-xs md:text-sm font-mono text-[#c9a77c]/60 hover:text-[#c9a77c] transition-colors border border-transparent hover:border-[#c9a77c]/30 px-2 py-1"
           >
-            {isMenuOpen ? <HiX /> : <HiMenu />}
+            [HOME]
           </button>
-        </div>
-
-        {/* 모바일 메뉴 */}
-        {isMenuOpen && (
-          <div className={styles.mobileMenu}>
-            {menuItems.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                className={styles.mobileMenuLink}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {item.name}
-              </a>
-            ))}
-            <a href="#contact" className={styles.mobileCtaButton} onClick={() => setIsMenuOpen(false)}>
-              Get In Touch
-            </a>
-          </div>
-        )}
-      </nav>
+          <button
+            onClick={() => scrollToSection("projects")}
+            className="text-xs md:text-sm font-mono text-[#c9a77c]/60 hover:text-[#c9a77c] transition-colors border border-transparent hover:border-[#c9a77c]/30 px-2 py-1"
+          >
+            [PROJECTS]
+          </button>
+          <button
+            onClick={() => scrollToSection("contact")}
+            className="text-xs md:text-sm font-mono text-[#c9a77c]/60 hover:text-[#c9a77c] transition-colors border border-transparent hover:border-[#c9a77c]/30 px-2 py-1"
+          >
+            [CONTACT]
+          </button>
+        </nav>
+      </div>
     </header>
   );
 }
