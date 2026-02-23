@@ -185,7 +185,7 @@ export function ProjectsSection({ onProjectClick }: ProjectsSectionProps) {
   return (
     <section id="projects" className="section-panel flex">
       {/* Header Panel */}
-      <div className="h-screen py-20 pb-24 bg-black w-screen flex-shrink-0 flex items-center justify-center">
+      <div className="section-panel h-screen py-20 pb-24 bg-black w-screen flex-shrink-0 flex items-center justify-center">
         <div className="max-w-4xl mx-auto px-4 md:px-6 w-full text-center section-content">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -240,7 +240,7 @@ export function ProjectsSection({ onProjectClick }: ProjectsSectionProps) {
       {projects.map((project, index) => (
         <div
           key={project.id}
-          className="h-screen py-[clamp(48px,6vh,80px)] pb-[clamp(48px,6vh,80px)] bg-black w-screen flex-shrink-0 flex items-center justify-center px-[0px]"
+          className="section-panel h-screen py-[clamp(48px,6vh,80px)] pb-[clamp(48px,6vh,80px)] bg-black w-screen flex-shrink-0 flex items-center justify-center px-[0px]"
         >
           <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8 w-full h-full flex items-center section-content">
             <motion.div

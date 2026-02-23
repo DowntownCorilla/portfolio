@@ -36,8 +36,11 @@ function App() {
       const screenWidth = window.innerWidth;
       const currentIndex = Math.round(wrapper.scrollLeft / screenWidth);
       const direction = e.key === "ArrowRight" ? 1 : -1;
-      const panels = wrapper.querySelectorAll(".section-panel").length;
-      const maxIndex = Math.max(0, panels - 1);
+      const totalPanels = Math.max(
+        1,
+        Math.round(wrapper.scrollWidth / screenWidth),
+      );
+      const maxIndex = Math.max(0, totalPanels - 1);
       const targetIndex = Math.max(
         0,
         Math.min(currentIndex + direction, maxIndex),

@@ -36,7 +36,7 @@ export function HeroSection() {
             <div className="border-2 border-[#c9a77c] inline-block p-1 mb-4">
               <div className="border border-[#c9a77c] px-3 md:px-4 py-2">
                 <span className="text-xs tracking-wider">
-                  FRONTEND_DEV_v2.0
+                  FRONTEND_DEV_v1.0
                 </span>
               </div>
             </div>

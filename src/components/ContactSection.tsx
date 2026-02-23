@@ -6,9 +6,9 @@ import { Mail, Github, Linkedin, Phone } from "lucide-react";
 export function ContactSection() {
   return (
     <section id="contact" className="section-panel">
-      <div className="h-screen py-20 pb-24 bg-black w-screen flex-shrink-0 flex items-center justify-center">
+      <div className="h-screen pt-[80px] pb-[60px] bg-black w-screen flex-shrink-0 flex items-center justify-center">
         <div className="max-w-4xl mx-auto px-4 md:px-6 w-full section-content">
-          <div className="text-center mb-8 md:mb-12">
+          <div className="text-center mb-[24px]">
             <div className="text-[#c9a77c]/60 font-mono text-xs md:text-sm mb-2 tracking-widest">
               [ COMMUNICATION ]
             </div>
@@ -20,7 +20,7 @@ export function ContactSection() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-8 md:mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-[24px]">
             <motion.a
               href="mailto:leeyunje96@gmail.com"
               initial={{ opacity: 0, x: 50 }}
