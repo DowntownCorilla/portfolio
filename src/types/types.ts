@@ -7,6 +7,7 @@ export interface Project {
   period: string;
   github: string;
   liveUrl: string;
+  liveNotice?: string;
   techStack: string[];
   overview: string;
   contributions: string[];

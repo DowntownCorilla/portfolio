@@ -13,6 +13,7 @@ import {
   ExternalLink,
 } from "lucide-react";
 import { Project } from "../types/types";
+import { LiveNoticeModal } from "./LiveNoticeModal";
 
 interface ProjectModalProps {
   project: Project;
@@ -21,6 +22,7 @@ interface ProjectModalProps {
 
 export function ProjectModal({ project, onClose }: ProjectModalProps) {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+  const [liveNoticeOpen, setLiveNoticeOpen] = useState(false);
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -127,7 +129,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                   </div>
                 </div>
 
-                {(project.github || project.liveUrl) && (
+                {(project.github || project.liveUrl || project.liveNotice) && (
                   <div className="flex flex-col sm:flex-row gap-3">
                     {project.github && (
                       <a
@@ -140,7 +142,15 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                         [VIEW_GITHUB]
                       </a>
                     )}
-                    {project.liveUrl && (
+                    {project.liveNotice ? (
+                      <button
+                        onClick={() => setLiveNoticeOpen(true)}
+                        className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-black border-2 border-[#c9a77c]/50 hover:bg-[#c9a77c]/10 transition-colors font-mono text-sm text-[#c9a77c]"
+                      >
+                        <ExternalLink className="w-4 h-4" />
+                        [VISIT_SITE]
+                      </button>
+                    ) : project.liveUrl ? (
                       <a
                         href={project.liveUrl}
                         target="_blank"
@@ -150,7 +160,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                         <ExternalLink className="w-4 h-4" />
                         [VISIT_SITE]
                       </a>
-                    )}
+                    ) : null}
                   </div>
                 )}
               </div>
@@ -348,6 +358,12 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
             }
           `}</style>
         </motion.div>
+
+        <LiveNoticeModal
+          open={liveNoticeOpen}
+          message={project.liveNotice || ""}
+          onClose={() => setLiveNoticeOpen(false)}
+        />
       </div>
     </AnimatePresence>
   );

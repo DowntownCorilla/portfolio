@@ -5,6 +5,7 @@ import { motion } from "motion/react";
 import { Project } from "../types/types";
 import { projects } from "../data/prodects";
 import { ExternalLink, Code } from "lucide-react";
+import { LiveNoticeModal } from "./LiveNoticeModal";
 
 interface ProjectsSectionProps {
   onProjectClick: (project: Project) => void;
@@ -171,6 +172,7 @@ function KeyContributions({
 }
 
 export function ProjectsSection({ onProjectClick }: ProjectsSectionProps) {
+  const [liveNotice, setLiveNotice] = useState<string | null>(null);
   const scrollToProject = (projectIndex: number) => {
     const wrapper = document.querySelector(".horizontal-scroll-wrapper");
     if (wrapper) {
@@ -278,7 +280,14 @@ export function ProjectsSection({ onProjectClick }: ProjectsSectionProps) {
                         [GITHUB]
                       </a>
                     )}
-                    {project.liveUrl && (
+                    {project.liveNotice ? (
+                      <button
+                        onClick={() => setLiveNotice(project.liveNotice || "")}
+                        className="text-[clamp(0.6rem,0.85vw,0.75rem)] font-mono text-[#c9a77c]/60 hover:text-[#c9a77c] border border-[#c9a77c]/30 px-2 py-1"
+                      >
+                        [LIVE]
+                      </button>
+                    ) : project.liveUrl ? (
                       <a
                         href={project.liveUrl}
                         target="_blank"
@@ -287,7 +296,7 @@ export function ProjectsSection({ onProjectClick }: ProjectsSectionProps) {
                       >
                         [LIVE]
                       </a>
-                    )}
+                    ) : null}
                   </div>
                 </div>
                 <div className="text-[clamp(0.7rem,1vw,0.9rem)] font-mono text-[#c9a77c]/80">
@@ -460,6 +469,12 @@ export function ProjectsSection({ onProjectClick }: ProjectsSectionProps) {
           </div>
         </div>
       ))}
+
+      <LiveNoticeModal
+        open={Boolean(liveNotice)}
+        message={liveNotice || ""}
+        onClose={() => setLiveNotice(null)}
+      />
 
       <style>{`
         .retro-text {

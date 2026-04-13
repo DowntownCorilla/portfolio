@@ -11,6 +11,8 @@ export const projects: Project[] = [
     period: "2024.01 - 2024.06",
     github: "https://github.com/MailMovers/mailmavers-frontend",
     liveUrl: "https://mailtree.com",
+    liveNotice:
+      "해당 서비스는 운영 종료 및 도메인 만료로 현재 접속할 수 없습니다.\n프로젝트 설명과 기여 내용은 본 포트폴리오에서 확인하실 수 있습니다.",
     techStack: [
       "Next.js",
       "React",
@@ -62,6 +64,8 @@ export const projects: Project[] = [
     period: "2024.07 - 2024.11",
     github: "https://github.com/MailMovers/mailtree_admin_frontend",
     liveUrl: "",
+    liveNotice:
+      "해당 서비스는 운영 종료 및 도메인 만료로 현재 접속할 수 없습니다.\n프로젝트 설명과 기여 내용은 본 포트폴리오에서 확인하실 수 있습니다.",
     techStack: [
       "Next.js",
       "React",
@@ -174,7 +178,7 @@ export const projects: Project[] = [
     screenshot: "project5/cover_p5.png",
     role: "Backend Developer",
     teamSize: "4명 (풀스택 1명, 프론트엔드 2명, 백엔드 1명)",
-    period: "2025.05 - 2025.06",
+    period: "2025.12 - 2025.12",
     github: "https://github.com/dacon-winner/planA",
     liveUrl: "https://view-glory-27028433.figma.site/",
     techStack: [
@@ -236,9 +240,9 @@ export const projects: Project[] = [
       "네이버 블로그 운영자를 위한 블로그 분석, 키워드 분석, SEO 최적화 서비스입니다. 블로그 지수, 방문자 트렌드, 게시글 순위를 분석하고, 키워드 검색량, 경쟁률, 트렌드 데이터를 제공합니다.",
     contributions: [
       "Module Federation 기반 MSA 구조 내 마이크로 프론트엔드 모듈 개발",
-      "Next.js API Routes 기반 BFF 구현으로 모듈별 데이터 흐름 캡슐화",
+      "Next.js API Routes 기반 BFF구조로 백엔드 모듈 구현",
       "네이버 API·크롤링 데이터 구조를 Notion에 문서화해 팀 내 데이터 기준점을 정립함",
-      "유지보수에 용이하도록 제너레이팅시에, 사용한 프롬프트를 컴폰너트, 순서별로 정리함",
+      "유지보수에 용이하도록 제너레이팅시에, 사용한 프롬프트를 컴포넌트, 순서별로 정리함",
 
       "Zustand 전역 상태 관리로 Props Drilling 제거 및 컴포넌트 결합도 감소",
       "페이지·섹션 단위 로딩·에러 상태 분리로 UX 안정성 개선",
@@ -283,7 +287,7 @@ export const projects: Project[] = [
     overview:
       "도비 블로그에서 제목, 본문 분석을 위한, FastAPI + kiwipiepy 기반의 형태소 분석기 서버 입니다.",
     contributions: [
-      "프롬프트를 활용한 AI 기반 스캐폴딩으로 FastAPI 형태소 분석 서버 초기 구조 자동 생성",
+      "형태소 분석기 서버 구조를 프롬프트 기반 문서로 정리해, 인수인계와 유지보수가 쉽도록 구조화",
       "kiwipiepy의 한계(신조어, 합성어, 연도 표현 미처리)를 보완하기 위해 도메인 기반 커스텀 사전 구성",
       "KoNLPy·OpenAI 모델·kiwipiepy 등 다양한 분석 방식을 비교하여 최종 분석 파이프라인 설계",
       "CPU-Bound 형태소 분석을 ThreadPoolExecutor로 분산하여 대량 요청 병렬 처리 구조 구축",
