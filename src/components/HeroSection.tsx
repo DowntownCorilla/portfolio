@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import { ChevronRight } from "lucide-react";
+import { TerminalIntro } from "@/components/TerminalIntro";
 
 export function HeroSection() {
   const scrollToProjects = () => {
@@ -42,36 +43,20 @@ export function HeroSection() {
             </div>
           </motion.div>
 
-          <motion.h1
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-4xl md:text-5xl lg:text-7xl mb-4 md:mb-6 font-mono text-[#c9a77c] retro-text"
+            className="mb-6 md:mb-8 min-h-[1rem] md:min-h-[8rem] lg:min-h-[8rem]"
           >
-            &gt; CORILLA_
-          </motion.h1>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="mb-6 md:mb-8"
-          >
-            <div className="text-base md:text-lg lg:text-xl text-[#c9a77c]/80 font-mono mb-2">
-              $ cat profile.txt
-            </div>
-            <div className="text-sm md:text-base lg:text-lg text-[#c9a77c]/60 font-mono max-w-2xl mx-auto px-4">
-              &gt; 사용자의 작은 불편을 발견하고 해결하는 개발자 이윤재입니다.
-              <br />
-              &gt; 더 나은 사용 경험을 고민하며 서비스를 만들겠습니다.
-            </div>
+            <TerminalIntro />
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex gap-3 md:gap-4 justify-center flex-wrap"
+            className="mt-4 md:mt-6 flex gap-3 md:gap-4 justify-center flex-wrap"
           >
             <button
               onClick={scrollToProjects}

@@ -143,6 +143,26 @@
     }
 }
 
+.terminal-caret {
+    display: inline-block;
+    animation: terminal-blink 1s steps(1) infinite;
+}
+
+.terminal-caret--hero {
+    vertical-align: 0;
+}
+
+@keyframes terminal-blink {
+    0%,
+    50% {
+        opacity: 1;
+    }
+    50.01%,
+    100% {
+        opacity: 0;
+    }
+}
+
 /**
  * Base typography. This is not applied to elements which have an ancestor with a Tailwind text class.
  */
