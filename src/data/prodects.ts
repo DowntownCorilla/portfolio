@@ -8,7 +8,7 @@ export const projects: Project[] = [
     screenshot: "/project1/landing_p1.png",
     role: "Frontend Developer (기여도 40%)",
     teamSize: "4명 (풀스택 1명, 프론트엔드 1명, 백엔드 2명)",
-    period: "2024.01 - 2024.06",
+    period: "2024.06 - 2025.06",
     github: "https://github.com/MailMovers/mailmavers-frontend",
     liveUrl: "https://mailtree.com",
     liveNotice:
@@ -45,7 +45,7 @@ export const projects: Project[] = [
       "소셜 로그인 연동 시 인증 플로우 문제 발생",
     ],
     solutions: [
-      "Axios Interceptor에서 401 에러 발생 시 LocalStorage의 토큰을 직접 갱신하고 헤더를 재설정한 뒤 원본 요청을 재수행하도록 일원화하여, 상태 관리 라이브러리(Recoil) 의존성을 제거하고 인증 로직의 신뢰성 확보",
+      "AccessToken은 Recoil 전역 상태로, RefreshToken은 LocalStorage에 보존해 페이지 이동·새로고침 시 중복 재발급을 막고, 공통 Layout 생명주기에서 AccessToken이 없을 때만 재발급하도록 정리. 이후 401 응답 시 토큰 갱신과 실패 요청 재실행을 Axios Interceptor에서 처리해 인증 흐름의 신뢰성 확보",
       "globalCompositeOperation = 'destination-over' 속성을 활용해 캔버스 최하단 레이어에 강제로 흰색(fillStyle = '#FFFFFF')을 합성하여, iOS에서도 일관된 흰색 배경이 적용되도록 구현",
       "User Agent로 iOS 환경을 감지하여, iOS일 때만 압축 효율이 좋은 image/jpeg (품질 0.9) 포맷으로 변환하고 Blob으로 재가공하여 업로드 안정성 확보",
       `1. 상태 분리 전략: 페이지 내에서만 일시적으로 쓰이는 UI 상태(모달 Open 여부 등)는 Custom Hook(useModal)으로 분리하여 로직을 캡슐화.
@@ -207,7 +207,7 @@ export const projects: Project[] = [
     ],
     solutions: [
       "기존 사용자(USER)에 사용자 입력정보가 포함되어있어, 플랜(PLAN)과 1:1 관계가 성립함, 이를 분리하기 위해 사용자 입력 정보 테이블(USERS_INFO)을 추가하여 사용자와 플랜을 1:N 관계로, 사용자 입력 정보를 플랜과 1:1 관계로 연결하여 변경함. 이를 통해 사용자는 여러 플랜을 비교해보고, 최적의 플랜을 고르기 위해 편집과, 비교플랜 생성을 자유롭게 할 수 있게 됨",
-      "DB에서 사용자 조건에 맞는 업체들을 각 업종별로 10개씩 선정해 AI 컨텍스트에 포함하는 RAG 패턴 기반 AI 추천 엔진 구현으로 초기 데이터 규모 제한 속에서도 실시간 추천 성능 유지함. AI 로직 한번에 약 0.4원 정도의 비용이 소모됨",
+      "DB에서 사용자 조건에 맞는 업체들을 메타데이터로 선별해 AI 컨텍스트에 포함하는 RAG 패턴 기반 AI 추천 엔진 구현으로 초기 데이터 규모 제한 속에서도 추천 성능을 유지함. AI 플랜 1회 생성 비용 0.28원 달성 (내부 테스트 기준)",
       "Server-Sent Events(SSE) + LangChain 스트리밍 적용. AsyncGenerator로 AI 응답 청크를 실시간 전송하여 진행 상황 단계별 제공힘",
       "deleted_at 컬럼을 사용한 Soft Delete 방식 채택으로 이후 서비스 진행시, 예약은 되어있는데, 플랜이 사라져서 관련 예약이 손실되는 경우를 방지함",
     ],
@@ -219,7 +219,7 @@ export const projects: Project[] = [
     screenshot: "/project6/dobby3.png",
     role: "Full Stack Developer (Frontend 100%, Backend 60%)",
     teamSize: "2명 (개발 리드 1명, 프론트엔드 1명)",
-    period: "2025.10 - 2026.1",
+    period: "2025.08 - 2026.01",
     github: "https://github.com/devDingco/dobby",
     liveUrl: "https://dobbyblog.com",
     techStack: [
