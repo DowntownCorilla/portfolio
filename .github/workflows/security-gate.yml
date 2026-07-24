@@ -1,5 +1,4 @@
-# Secure PR Gate caller — corilla-portfolio smoke test
-# Gate 정책 검증이 아니라 SAST / Trivy / SBOM / DAST 동작 확인용.
+# Secure PR Gate caller — PR soft-profile test only.
 
 name: Secure PR Gate
 
@@ -37,4 +36,3 @@ jobs:
       # Dockerfile 없음 → Trivy fs + CycloneDX SBOM
       # DT secrets 없으면 업로드만 skip (SBOM artifact는 유지)
       dependency_track_upload_mode: never
-    secrets: inherit
