@@ -8,8 +8,8 @@ const WHOAMI_CMD = "$ whoami";
 const WHOAMI_OUT = "> CORILLA_";
 const PROFILE_CMD = "$ cat profile.txt";
 const PROFILE_OUT = [
-  "> 사용자의 작은 불편을 발견하고 해결하는 개발자 이윤재입니다.",
-  "> 더 나은 사용 경험을 고민하며 서비스를 만들겠습니다.",
+  "> 서비스를 만든 개발자의 시선으로 위험을 찾는 보안 엔지니어 이윤재입니다.",
+  "> 현재에 안주하지 않고 항상 발전해 나가겠습니다.",
 ];
 
 const CHAR_DELAY_MS = 50;

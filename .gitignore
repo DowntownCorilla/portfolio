@@ -38,3 +38,6 @@ next-env.d.ts
 # local resume / agent context (do not commit)
 .cursor/
 resume_context/
+
+# local Semgrep venv (do not commit)
+.venv-semgrep/

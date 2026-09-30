@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+  <title id="title">Midam commerce threat modeling</title>
+  <desc id="desc">Actors and trust boundaries are mapped to STRIDE threats and prioritized requirements.</desc>
+  <rect width="1280" height="720" fill="#050505"/>
+  <g stroke="#c9a77c" fill="none" stroke-width="3">
+    <rect x="70" y="80" width="1140" height="560" rx="8" opacity=".45"/>
+    <rect x="105" y="145" width="235" height="430" rx="6" stroke-dasharray="12 8"/>
+    <rect x="405" y="145" width="350" height="430" rx="6"/>
+    <rect x="820" y="145" width="345" height="430" rx="6" stroke-dasharray="12 8"/>
+    <circle cx="222" cy="265" r="55"/><circle cx="222" cy="455" r="55"/>
+    <rect x="470" y="220" width="220" height="80" rx="4"/><rect x="470" y="405" width="220" height="80" rx="4"/>
+    <rect x="875" y="220" width="235" height="80" rx="4"/><rect x="875" y="405" width="235" height="80" rx="4"/>
+    <path d="M277 265h193m220 0h185M277 455h193m220 0h185M580 300v105"/>
+  </g>
+  <g fill="#c9a77c" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">
+    <text x="640" y="55" font-size="22" letter-spacing="5">THREAT MODEL / DFD + STRIDE</text>
+    <text x="222" y="270" font-size="20">BUYER</text><text x="222" y="460" font-size="20">ARTISAN</text>
+    <text x="580" y="267" font-size="24">ACCOUNT</text><text x="580" y="452" font-size="24">ORDER / PAY</text>
+    <text x="992" y="267" font-size="22">P0 / P1</text><text x="992" y="452" font-size="22">REQUIREMENTS</text>
+    <text x="222" y="125" font-size="15" opacity=".7">ACTORS</text><text x="580" y="125" font-size="15" opacity=".7">TRUST BOUNDARY</text><text x="992" y="125" font-size="15" opacity=".7">ACTION</text>
+  </g>
+</svg>

@@ -3,6 +3,7 @@
 import { motion } from "motion/react";
 import { ChevronRight } from "lucide-react";
 import { TerminalIntro } from "@/components/TerminalIntro";
+import { projects } from "@/data/prodects";
 
 export function HeroSection() {
   const scrollToProjects = () => {
@@ -36,9 +37,14 @@ export function HeroSection() {
             </div>
             <div className="border-2 border-[#c9a77c] inline-block p-1 mb-4">
               <div className="border border-[#c9a77c] px-3 md:px-4 py-2">
-                <span className="text-xs tracking-wider">
-                  FRONTEND_DEV_v1.0
-                </span>
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-3 font-mono text-[0.65rem] md:text-xs tracking-wider">
+                  <span className="text-[#c9a77c]/60">
+                    FRONTEND_DEV_v1.0
+                  </span>
+                  <span className="text-[#c9a77c] retro-text">
+                    SECURITY_ENGINEER_v2.0
+                  </span>
+                </div>
               </div>
             </div>
           </motion.div>
@@ -168,7 +174,7 @@ export function HeroSection() {
 
               {/* Project count indicator */}
               <div className="mt-1 text-[#c9a77c]/30 group-hover:text-[#c9a77c]/50 font-mono text-[9px] transition-colors">
-                [6 PROJECTS]
+                [{projects.length} PROJECTS]
               </div>
             </div>
 
@@ -209,7 +215,7 @@ export function HeroSection() {
           [STATUS: ONLINE]
         </div>
         <div className="absolute bottom-16 md:bottom-4 left-2 md:left-4 text-[#c9a77c]/40 font-mono text-xs">
-          [2026.02.10]
+          [2026.09.30]
         </div>
       </div>
 

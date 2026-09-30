@@ -11,6 +11,14 @@ interface ProjectsSectionProps {
   onProjectClick: (project: Project) => void;
 }
 
+const SECURITY_PROJECT_IDS = new Set([
+  "security-saas",
+  "secure-pr-gate",
+  "va-mcp",
+  "midam-security",
+  "kisa-disclosure",
+]);
+
 function TechStackRow({
   techStack,
   onMore,
@@ -173,6 +181,29 @@ function KeyContributions({
 
 export function ProjectsSection({ onProjectClick }: ProjectsSectionProps) {
   const [liveNotice, setLiveNotice] = useState<string | null>(null);
+  const indexedProjects = projects.map((project, index) => ({ project, index }));
+  const securityProjects = indexedProjects.filter(({ project }) =>
+    SECURITY_PROJECT_IDS.has(project.id)
+  );
+  const webProjects = indexedProjects.filter(
+    ({ project }) => !SECURITY_PROJECT_IDS.has(project.id)
+  );
+
+  const renderProjectButton = (project: Project, index: number) => (
+    <button
+      key={project.id}
+      onClick={() => scrollToProject(index)}
+      className="border border-[#c9a77c]/40 p-2 md:p-3 hover:border-[#c9a77c] hover:bg-[#c9a77c]/5 transition-all cursor-pointer group retro-project-card min-w-0"
+    >
+      <div className="text-[#c9a77c]/60 group-hover:text-[#c9a77c] font-mono text-[clamp(0.6rem,1vw,0.75rem)] mb-1 transition-colors">
+        [{String(index + 1).padStart(2, "0")}]
+      </div>
+      <div className="text-[#c9a77c] group-hover:text-shadow-glow font-mono text-[clamp(0.65rem,1vw,0.85rem)] truncate transition-all">
+        {project.shortTitle ?? project.title.split(" ")[0]}
+      </div>
+    </button>
+  );
+
   const scrollToProject = (projectIndex: number) => {
     const wrapper = document.querySelector(".horizontal-scroll-wrapper");
     if (wrapper) {
@@ -187,7 +218,7 @@ export function ProjectsSection({ onProjectClick }: ProjectsSectionProps) {
   return (
     <section id="projects" className="section-panel flex">
       {/* Header Panel */}
-      <div className="section-panel h-screen py-20 pb-24 bg-black w-screen flex-shrink-0 flex items-center justify-center">
+      <div className="section-panel h-screen py-14 pb-16 bg-black w-screen flex-shrink-0 flex items-center justify-center">
         <div className="max-w-4xl mx-auto px-4 md:px-6 w-full text-center section-content">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -198,40 +229,46 @@ export function ProjectsSection({ onProjectClick }: ProjectsSectionProps) {
             <div className="text-[#c9a77c]/60 font-mono text-[clamp(0.65rem,1vw,0.75rem)] mb-2 tracking-widest">
               [ PORTFOLIO ]
             </div>
-            <h2 className="text-[clamp(1.6rem,3vw,2.75rem)] mb-4 font-mono text-[#c9a77c] retro-text">
+            <h2 className="text-[clamp(1.6rem,3vw,2.75rem)] mb-2 font-mono text-[#c9a77c] retro-text">
               &gt; PROJECTS_
             </h2>
-            <p className="text-[clamp(0.85rem,1.4vw,1.1rem)] text-[#c9a77c]/60 font-mono mb-8">
+            <p className="text-[clamp(0.85rem,1.4vw,1.1rem)] text-[#c9a77c]/60 font-mono mb-4">
               $ ls -la ~/projects/
             </p>
 
-            <div className="border-2 border-[#c9a77c]/30 p-6 md:p-8 lg:p-12 retro-box mb-8">
-              <div className="text-[#c9a77c]/80 font-mono text-[clamp(0.75rem,1.2vw,0.95rem)] mb-6">
+            <div className="border-2 border-[#c9a77c]/30 p-4 md:p-5 lg:p-6 retro-box mb-4">
+              <div className="text-[#c9a77c]/80 font-mono text-[clamp(0.75rem,1.2vw,0.95rem)] mb-4">
                 &gt; Total: {projects.length} projects
                 <br />
-                &gt; Tech Stack: React, TypeScript, Node.js, etc.
+                &gt; Focus: Security Engineering, DevSecOps, Web Development
                 <br />
-                &gt; Status: Production Ready
+                &gt; Status: Implemented + In Progress
               </div>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-                {projects.map((project, index) => (
-                  <button
-                    key={project.id}
-                    onClick={() => scrollToProject(index)}
-                    className="border border-[#c9a77c]/40 p-3 md:p-4 hover:border-[#c9a77c] hover:bg-[#c9a77c]/5 transition-all cursor-pointer group retro-project-card"
-                  >
-                    <div className="text-[#c9a77c]/60 group-hover:text-[#c9a77c] font-mono text-[clamp(0.65rem,1vw,0.75rem)] mb-1 transition-colors">
-                      [{String(index + 1).padStart(2, "0")}]
-                    </div>
-                    <div className="text-[#c9a77c] group-hover:text-shadow-glow font-mono text-[clamp(0.7rem,1vw,0.85rem)] truncate transition-all">
-                      {project.title.split(" ")[0]}
-                    </div>
-                  </button>
-                ))}
+              <div className="space-y-3 md:space-y-4 text-left">
+                <div>
+                  <div className="mb-2 font-mono text-[clamp(0.65rem,1vw,0.8rem)] text-[#c9a77c]/80 tracking-wider">
+                    [ SECURITY PROJECTS ]
+                  </div>
+                  <div className="grid grid-cols-3 md:grid-cols-5 gap-2 md:gap-3">
+                    {securityProjects.map(({ project, index }) =>
+                      renderProjectButton(project, index)
+                    )}
+                  </div>
+                </div>
+                <div>
+                  <div className="mb-2 font-mono text-[clamp(0.65rem,1vw,0.8rem)] text-[#c9a77c]/80 tracking-wider">
+                    [ WEB DEVELOPMENT PROJECTS ]
+                  </div>
+                  <div className="grid grid-cols-3 md:grid-cols-4 gap-2 md:gap-3">
+                    {webProjects.map(({ project, index }) =>
+                      renderProjectButton(project, index)
+                    )}
+                  </div>
+                </div>
               </div>
             </div>
 
-            <div className="text-[#c9a77c]/40 font-mono text-[clamp(0.65rem,1vw,0.8rem)]">
+            <div className="hidden md:block text-[#c9a77c]/40 font-mono text-[clamp(0.65rem,1vw,0.8rem)]">
               [CLICK projects above or SCROLL_RIGHT to view details →]
             </div>
           </motion.div>
@@ -305,7 +342,7 @@ export function ProjectsSection({ onProjectClick }: ProjectsSectionProps) {
               </div>
 
               {/* Mobile: Simplified Layout */}
-              <div className="lg:hidden flex-1 flex flex-col gap-3 justify-center overflow-hidden">
+              <div className="lg:hidden flex-1 min-h-0 flex flex-col gap-3 justify-start overflow-y-auto custom-scrollbar pr-1 pb-1">
                 {/* Image */}
                 <div
                   className="relative overflow-hidden border-2 border-[#c9a77c]/30 transition-all cursor-pointer retro-card group flex-shrink-0"
@@ -315,7 +352,7 @@ export function ProjectsSection({ onProjectClick }: ProjectsSectionProps) {
                     <img
                       src={project.thumbnail}
                       alt={project.title}
-                      className="w-full h-full object-cover opacity-70 group-hover:opacity-90 transition-opacity"
+                      className="w-full h-full object-contain object-center opacity-80 group-hover:opacity-100 transition-opacity"
                     />
                     <div className="absolute inset-0 scanlines opacity-20" />
                     <div className="absolute inset-0 bg-[#c9a77c]/5 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
@@ -378,18 +415,18 @@ export function ProjectsSection({ onProjectClick }: ProjectsSectionProps) {
               </div>
 
               {/* Desktop: Full Layout */}
-              <div className="hidden lg:grid flex-1 grid-cols-2 gap-[clamp(0.75rem,1.5vw,1.5rem)] overflow-hidden">
-                {/* Left: Image & Tech Stack */}
-                <div className="flex flex-col gap-3 md:gap-4 h-full overflow-hidden">
+              <div className="hidden lg:flex flex-1 min-h-0 flex-col gap-[clamp(0.75rem,1.5vw,1.25rem)] overflow-hidden">
+                <div className="grid flex-1 min-h-0 grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)] gap-[clamp(0.75rem,1.5vw,1.5rem)] overflow-hidden">
+                  {/* Left: Project image */}
                   <div
-                    className="relative overflow-hidden border-2 border-[#c9a77c]/30 transition-all cursor-pointer retro-card group flex-shrink-0"
+                    className="relative min-h-0 overflow-hidden border-2 border-[#c9a77c]/30 transition-all cursor-pointer retro-card group"
                     onClick={() => onProjectClick(project)}
                   >
-                    <div className="aspect-video relative">
+                    <div className="relative h-full min-h-0">
                       <img
                         src={project.thumbnail}
                         alt={project.title}
-                        className="w-full h-full object-cover opacity-70 group-hover:opacity-90 transition-opacity"
+                        className="w-full h-full object-contain object-center opacity-80 group-hover:opacity-100 transition-opacity"
                       />
                       <div className="absolute inset-0 scanlines opacity-20" />
                       <div className="absolute inset-0 bg-[#c9a77c]/5 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
@@ -400,9 +437,34 @@ export function ProjectsSection({ onProjectClick }: ProjectsSectionProps) {
                     </div>
                   </div>
 
-                  <div className="border-2 border-[#c9a77c]/30 p-[clamp(0.5rem,1vw,0.75rem)] md:p-[clamp(0.6rem,1.2vw,0.9rem)] flex-1 overflow-hidden flex flex-col">
-                    <div className="flex items-center gap-2 mb-[clamp(0.2rem,0.8vh,0.4rem)] flex-shrink-0">
-                      <Code className="w-4 h-4 text-[#c9a77c]" />
+                  {/* Right: Overview & contributions */}
+                  <div className="flex min-h-0 flex-col gap-3 md:gap-4 overflow-hidden">
+                    <div className="border-2 border-[#c9a77c]/30 p-[clamp(0.5rem,1vw,0.75rem)] md:p-[clamp(0.6rem,1.2vw,0.9rem)] flex-shrink-0">
+                      <div className="text-[clamp(0.65rem,0.9vw,0.8rem)] font-mono text-[#c9a77c] mb-[clamp(0.2rem,0.8vh,0.4rem)]">
+                        [OVERVIEW]
+                      </div>
+                      <p className="text-[clamp(0.6rem,0.85vw,0.75rem)] font-mono text-[#c9a77c]/70 leading-relaxed line-clamp-3">
+                        {project.overview}
+                      </p>
+                    </div>
+
+                    <div className="border-2 border-[#c9a77c]/30 overflow-hidden flex-1 min-h-0 flex flex-col relative p-[clamp(0.5rem,1vw,0.75rem)] md:p-[clamp(0.6rem,1.2vw,0.9rem)]">
+                      <div className="text-[clamp(0.65rem,0.9vw,0.8rem)] font-mono text-[#c9a77c] mb-[clamp(0.2rem,0.8vh,0.4rem)] flex-shrink-0">
+                        [KEY_CONTRIBUTIONS]
+                      </div>
+                      <KeyContributions
+                        contributions={project.contributions}
+                        onMore={() => onProjectClick(project)}
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Bottom: Balanced project metadata */}
+                <div className="grid grid-cols-4 gap-3 md:gap-4 flex-shrink-0">
+                  <div className="col-span-2 border-2 border-[#c9a77c]/30 p-[clamp(0.5rem,1vw,0.75rem)] md:p-[clamp(0.6rem,1.2vw,0.9rem)] overflow-hidden">
+                    <div className="flex items-center gap-2 mb-[clamp(0.2rem,0.8vh,0.4rem)]">
+                      <Code className="w-4 h-4 text-[#c9a77c] flex-shrink-0" />
                       <div className="text-[clamp(0.65rem,0.9vw,0.8rem)] font-mono text-[#c9a77c]">
                         [TECH_STACK]
                       </div>
@@ -412,45 +474,21 @@ export function ProjectsSection({ onProjectClick }: ProjectsSectionProps) {
                       onMore={() => onProjectClick(project)}
                     />
                   </div>
-                </div>
 
-                {/* Right: Details */}
-                <div className="flex flex-col gap-3 md:gap-4 h-full overflow-hidden">
-                  <div className="border-2 border-[#c9a77c]/30 p-[clamp(0.5rem,1vw,0.75rem)] md:p-[clamp(0.6rem,1.2vw,0.9rem)] flex-shrink-0 min-h-[clamp(5.5rem,15.1vh,7.5rem)] max-h-[clamp(5.5rem,15.1vh,7.5rem)]">
+                  <div className="border-2 border-[#c9a77c]/50 p-[clamp(0.5rem,1vw,0.75rem)] md:p-[clamp(0.6rem,1.2vw,0.9rem)]">
                     <div className="text-[clamp(0.65rem,0.9vw,0.8rem)] font-mono text-[#c9a77c] mb-[clamp(0.2rem,0.8vh,0.4rem)]">
-                      [OVERVIEW]
+                      [CHALLENGES]
                     </div>
-                    <p className="text-[clamp(0.6rem,0.85vw,0.75rem)] font-mono text-[#c9a77c]/70 leading-relaxed line-clamp-3">
-                      {project.overview}
-                    </p>
+                    <div className="text-[clamp(0.6rem,0.85vw,0.75rem)] font-mono text-[#c9a77c]/60">
+                      {project.problems.length} issues solved
+                    </div>
                   </div>
-
-                  <div className="border-2 border-[#c9a77c]/30 overflow-hidden flex flex-col relative p-[clamp(0.5rem,1vw,0.75rem)] md:p-[clamp(0.6rem,1.2vw,0.9rem)] min-h-[clamp(9rem,24.9vh,12.5rem)] max-h-[clamp(9rem,24.9vh,12.5rem)]">
-                    <div className="text-[clamp(0.65rem,0.9vw,0.8rem)] font-mono text-[#c9a77c] mb-[clamp(0.2rem,0.8vh,0.4rem)] flex-shrink-0">
-                      [KEY_CONTRIBUTIONS]
+                  <div className="border-2 border-[#c9a77c]/50 p-[clamp(0.5rem,1vw,0.75rem)] md:p-[clamp(0.6rem,1.2vw,0.9rem)]">
+                    <div className="text-[clamp(0.65rem,0.9vw,0.8rem)] font-mono text-[#c9a77c] mb-[clamp(0.2rem,0.8vh,0.4rem)]">
+                      [SOLUTIONS]
                     </div>
-                    <KeyContributions
-                      contributions={project.contributions}
-                      onMore={() => onProjectClick(project)}
-                    />
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-3 md:gap-4 flex-shrink-0">
-                    <div className="border-2 border-[#c9a77c]/50 p-[clamp(0.5rem,1vw,0.75rem)] md:p-[clamp(0.6rem,1.2vw,0.9rem)]">
-                      <div className="text-[clamp(0.65rem,0.9vw,0.8rem)] font-mono text-[#c9a77c] mb-[clamp(0.2rem,0.8vh,0.4rem)]">
-                        [CHALLENGES]
-                      </div>
-                      <div className="text-[clamp(0.6rem,0.85vw,0.75rem)] font-mono text-[#c9a77c]/60">
-                        {project.problems.length} issues solved
-                      </div>
-                    </div>
-                    <div className="border-2 border-[#c9a77c]/50 p-[clamp(0.5rem,1vw,0.75rem)] md:p-[clamp(0.6rem,1.2vw,0.9rem)]">
-                      <div className="text-[clamp(0.65rem,0.9vw,0.8rem)] font-mono text-[#c9a77c] mb-[clamp(0.2rem,0.8vh,0.4rem)]">
-                        [SOLUTIONS]
-                      </div>
-                      <div className="text-[clamp(0.6rem,0.85vw,0.75rem)] font-mono text-[#c9a77c]/60">
-                        {project.solutions.length} implemented
-                      </div>
+                    <div className="text-[clamp(0.6rem,0.85vw,0.75rem)] font-mono text-[#c9a77c]/60">
+                      {project.solutions.length} implemented
                     </div>
                   </div>
                 </div>
