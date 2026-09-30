@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+  <title id="title">VA-MCP API security validation flow</title>
+  <desc id="desc">An AI agent sends endpoint context to an MCP planner and restricted Python tools.</desc>
+  <rect width="1280" height="720" fill="#050505"/>
+  <g stroke="#c9a77c" fill="none" stroke-width="3">
+    <rect x="70" y="80" width="1140" height="560" rx="8" opacity=".45"/>
+    <rect x="105" y="255" width="210" height="160" rx="6"/>
+    <rect x="400" y="255" width="210" height="160" rx="6"/>
+    <rect x="695" y="255" width="210" height="160" rx="6"/>
+    <rect x="990" y="255" width="175" height="160" rx="6"/>
+    <path d="M315 335h85m210 0h85m210 0h85"/>
+    <path d="M360 325l20 10-20 10m295-20l20 10-20 10m295-20l20 10-20 10"/>
+  </g>
+  <g fill="#c9a77c" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">
+    <text x="640" y="55" font-size="22" letter-spacing="5">VA-MCP / API SECURITY AFTER TEST</text>
+    <text x="210" y="320" font-size="26">AI AGENT</text><text x="210" y="355" font-size="15" opacity=".7">ENDPOINT CONTEXT</text>
+    <text x="505" y="320" font-size="26">MCP SERVER</text><text x="505" y="355" font-size="15" opacity=".7">NORMALIZE + PLAN</text>
+    <text x="800" y="320" font-size="24">PYTHON TOOLS</text><text x="800" y="355" font-size="15" opacity=".7">CONTROLLED REQUEST</text>
+    <text x="1077" y="320" font-size="25">REPORT</text><text x="1077" y="355" font-size="15" opacity=".7">EVIDENCE</text>
+    <text x="640" y="540" font-size="17" opacity=".75">OWASP TOP 10 · AUTH · ACCESS CONTROL · CORS</text>
+  </g>
+</svg>

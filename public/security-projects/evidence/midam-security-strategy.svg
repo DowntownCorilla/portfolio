@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">장인몰 보안 차별화 전략</title>
+  <desc id="desc">장인몰의 구조적 위험과 공통 보안 기본선, 서비스 특화 전략 및 사용자에게 전달할 신뢰 메시지를 설명하는 한 장 자료</desc>
+  <defs>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#0f172a" flood-opacity=".10"/></filter>
+    <style>.kr{font-family:Pretendard,'Noto Sans KR',Arial,sans-serif}.title{font-size:36px;font-weight:800;fill:#0f172a}.sub{font-size:16px;fill:#475569}.section{font-size:21px;font-weight:800}.cardTitle{font-size:18px;font-weight:800;fill:#0f172a}.body{font-size:14px;fill:#475569}.num{font-size:18px;font-weight:900;fill:white}.chip{font-size:13px;font-weight:700}.message{font-size:18px;font-weight:800;fill:#0f172a}</style>
+  </defs>
+  <rect width="1600" height="900" fill="#f8fafc"/>
+  <text x="70" y="62" class="kr title">장인몰 보안 차별화 전략</text>
+  <text x="70" y="92" class="kr sub">공통 통제를 ‘차별점’으로 포장하지 않고, 장인몰의 구조적 위험에 맞춘 보호 전략을 별도로 설계</text>
+
+  <text x="70" y="145" class="kr section" fill="#b45309">1. 왜 장인몰에는 다른 보호가 필요한가</text>
+  <g filter="url(#shadow)">
+    <rect x="70" y="170" width="345" height="136" rx="16" fill="white" stroke="#fed7aa"/><circle cx="105" cy="207" r="20" fill="#ea580c"/><text x="105" y="214" text-anchor="middle" class="kr num">1</text><text x="140" y="202" class="kr cardTitle">한 계정에 권한이 집중</text><text x="140" y="228" class="kr body">개인 장인의 계정 하나가 상품·주문·고객</text><text x="140" y="250" class="kr body">정보와 정산까지 연결됨</text>
+    <rect x="442" y="170" width="345" height="136" rx="16" fill="white" stroke="#fed7aa"/><circle cx="477" cy="207" r="20" fill="#ea580c"/><text x="477" y="214" text-anchor="middle" class="kr num">2</text><text x="512" y="202" class="kr cardTitle">정산은 생계와 직결</text><text x="512" y="228" class="kr body">계정 탈취나 정산계좌 변경은 단순 정보</text><text x="512" y="250" class="kr body">노출을 넘어 직접적인 금전 피해로 이어짐</text>
+    <rect x="814" y="170" width="345" height="136" rx="16" fill="white" stroke="#fed7aa"/><circle cx="849" cy="207" r="20" fill="#ea580c"/><text x="849" y="214" text-anchor="middle" class="kr num">3</text><text x="884" y="202" class="kr cardTitle">생활공간과 개인정보가 연결</text><text x="884" y="228" class="kr body">공방 주소·연락처·배송 정보 노출이</text><text x="884" y="250" class="kr body">장인의 사생활 침해로 확장될 수 있음</text>
+    <rect x="1186" y="170" width="345" height="136" rx="16" fill="white" stroke="#fed7aa"/><circle cx="1221" cy="207" r="20" fill="#ea580c"/><text x="1221" y="214" text-anchor="middle" class="kr num">4</text><text x="1256" y="202" class="kr cardTitle">신뢰 자체가 상품 가치</text><text x="1256" y="228" class="kr body">소량·고가·주문제작 거래에서는 장인과</text><text x="1256" y="250" class="kr body">상품의 진위, 거래 무결성이 핵심 자산</text>
+  </g>
+
+  <rect x="70" y="345" width="1460" height="105" rx="18" fill="#eff6ff" stroke="#60a5fa" stroke-width="2"/>
+  <text x="100" y="381" class="kr section" fill="#1d4ed8">2. Security Baseline — 모든 커머스에 필요한 공통 기본선</text>
+  <g class="kr chip" fill="#1e3a8a">
+    <rect x="100" y="400" width="180" height="32" rx="16" fill="#dbeafe"/><text x="190" y="421" text-anchor="middle">MFA · 최소권한 RBAC</text>
+    <rect x="295" y="400" width="170" height="32" rx="16" fill="#dbeafe"/><text x="380" y="421" text-anchor="middle">WAF · Rate Limit</text>
+    <rect x="480" y="400" width="200" height="32" rx="16" fill="#dbeafe"/><text x="580" y="421" text-anchor="middle">암호화 · Secret 관리</text>
+    <rect x="695" y="400" width="190" height="32" rx="16" fill="#dbeafe"/><text x="790" y="421" text-anchor="middle">SAST · DAST · SCA</text>
+    <rect x="900" y="400" width="180" height="32" rx="16" fill="#dbeafe"/><text x="990" y="421" text-anchor="middle">감사 로그 · 탐지</text>
+    <rect x="1095" y="400" width="405" height="32" rx="16" fill="#dbeafe"/><text x="1297" y="421" text-anchor="middle">기본선은 필수 통제이며 그 자체가 차별점은 아님</text>
+  </g>
+
+  <text x="70" y="505" class="kr section" fill="#047857">3. 장인몰 특화 전략 — 구조적 위험에 직접 대응</text>
+  <g filter="url(#shadow)">
+    <rect x="70" y="530" width="460" height="105" rx="14" fill="white" stroke="#6ee7b7"/><circle cx="105" cy="565" r="19" fill="#059669"/><text x="105" y="572" text-anchor="middle" class="kr num">1</text><text x="140" y="558" class="kr cardTitle">Seller Account &amp; Payout Shield</text><text x="140" y="585" class="kr body">고위험 행위 재인증 · 정산계좌 변경 보호 · 알림</text><text x="140" y="607" class="kr body">→ 위험 ① 계정 권한 집중 + ② 정산 피해 대응</text>
+    <rect x="570" y="530" width="460" height="105" rx="14" fill="white" stroke="#6ee7b7"/><circle cx="605" cy="565" r="19" fill="#059669"/><text x="605" y="572" text-anchor="middle" class="kr num">2</text><text x="640" y="558" class="kr cardTitle">Artisan Privacy Shield</text><text x="640" y="585" class="kr body">주소·연락처 최소 노출 · 마스킹 · 목적별 접근통제</text><text x="640" y="607" class="kr body">→ 위험 ③ 장인의 생활공간과 개인정보 보호</text>
+    <rect x="1070" y="530" width="460" height="105" rx="14" fill="white" stroke="#6ee7b7"/><circle cx="1105" cy="565" r="19" fill="#059669"/><text x="1105" y="572" text-anchor="middle" class="kr num">3</text><text x="1140" y="558" class="kr cardTitle">Transaction Integrity &amp; Transparency</text><text x="1140" y="585" class="kr body">주문·결제·정산 상태 추적 · 변경 이력 · 이의제기</text><text x="1140" y="607" class="kr body">→ 위험 ② 금전 피해 + ④ 거래 무결성 대응</text>
+    <rect x="70" y="660" width="460" height="105" rx="14" fill="white" stroke="#6ee7b7"/><circle cx="105" cy="695" r="19" fill="#059669"/><text x="105" y="702" text-anchor="middle" class="kr num">4</text><text x="140" y="688" class="kr cardTitle">Verified Artisan &amp; Product Trust</text><text x="140" y="715" class="kr body">장인·상품 검증 수준과 이력 표시 · 사칭 방지</text><text x="140" y="737" class="kr body">→ 위험 ④ 장인과 상품 신뢰 보호</text>
+    <rect x="570" y="660" width="460" height="105" rx="14" fill="white" stroke="#6ee7b7"/><circle cx="605" cy="695" r="19" fill="#059669"/><text x="605" y="702" text-anchor="middle" class="kr num">5</text><text x="640" y="688" class="kr cardTitle">Behavior-Based Protection</text><text x="640" y="715" class="kr body">평소와 다른 로그인·계좌·주문 행위 탐지와 추가 확인</text><text x="640" y="737" class="kr body">→ 위험 ①~④의 이상행위를 조기에 식별</text>
+    <rect x="1070" y="660" width="460" height="105" rx="14" fill="white" stroke="#6ee7b7"/><circle cx="1105" cy="695" r="19" fill="#059669"/><text x="1105" y="702" text-anchor="middle" class="kr num">6</text><text x="1140" y="688" class="kr cardTitle">Security Transparency / Trust Center</text><text x="1140" y="715" class="kr body">보호 원칙·신고 채널·대응 절차를 이용자에게 공개</text><text x="1140" y="737" class="kr body">→ 내부 통제를 사용자가 확인할 수 있는 신뢰로 전환</text>
+  </g>
+
+  <text x="70" y="813" class="kr section" fill="#4338ca">사용자에게 전달할 세 가지 신뢰</text>
+  <rect x="70" y="832" width="460" height="48" rx="12" fill="#eef2ff" stroke="#a5b4fc"/><text x="300" y="862" text-anchor="middle" class="kr message">장인의 계정과 정산을 보호한다</text>
+  <rect x="570" y="832" width="460" height="48" rx="12" fill="#eef2ff" stroke="#a5b4fc"/><text x="800" y="862" text-anchor="middle" class="kr message">장인·상품·거래의 신뢰성을 보호한다</text>
+  <rect x="1070" y="832" width="460" height="48" rx="12" fill="#eef2ff" stroke="#a5b4fc"/><text x="1300" y="862" text-anchor="middle" class="kr message">보이지 않는 보안을 보이는 신뢰로 바꾼다</text>
+</svg>

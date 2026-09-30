@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">공예 커머스 공개 보안정보 비교 분석</title>
+  <desc id="desc">아이디어스, 텀블벅, 공예정원의 공개 자료를 비교하고 미담 보안 요구사항을 도출한 보고서형 표</desc>
+  <style>.kr{font-family:Pretendard,'Noto Sans KR',Arial,sans-serif}.title{font-size:36px;font-weight:800;fill:#0f172a}.sub{font-size:16px;fill:#475569}.head{font-size:18px;font-weight:800;fill:#fff}.label{font-size:16px;font-weight:800;fill:#0f172a}.cell{font-size:14px;fill:#334155}.req{font-size:17px;font-weight:800;fill:#0f172a}.small{font-size:13px;fill:#64748b}</style>
+  <rect width="1600" height="900" fill="#f8fafc"/>
+  <text x="70" y="62" class="kr title">공예 커머스 공개 보안정보 비교 분석</text>
+  <text x="70" y="92" class="kr sub">정책·인증·컴플라이언스·취약점 공시 관점의 공개자료 비교 → 미담 MVP 보안 요구사항 도출</text>
+  <rect x="70" y="130" width="300" height="62" rx="12" fill="#334155"/><text x="220" y="169" text-anchor="middle" class="kr head">비교 관점</text>
+  <rect x="380" y="130" width="350" height="62" rx="12" fill="#2563eb"/><text x="555" y="169" text-anchor="middle" class="kr head">아이디어스</text>
+  <rect x="740" y="130" width="350" height="62" rx="12" fill="#7c3aed"/><text x="915" y="169" text-anchor="middle" class="kr head">텀블벅</text>
+  <rect x="1100" y="130" width="430" height="62" rx="12" fill="#0f766e"/><text x="1315" y="169" text-anchor="middle" class="kr head">공예정원</text>
+  <g class="kr">
+    <rect x="70" y="202" width="1460" height="112" rx="8" fill="white" stroke="#cbd5e1"/><text x="95" y="245" class="label">정책·컴플라이언스</text><text x="95" y="270" class="small">공개 정책과 인증</text><text x="405" y="240" class="cell">ISMS 인증 공개</text><text x="405" y="266" class="cell">개인정보처리방침 확인</text><text x="765" y="240" class="cell">ISMS 인증 공개</text><text x="765" y="266" class="cell">보호조치 내용을 비교적 상세히 공개</text><text x="1125" y="240" class="cell">개인정보·결제 관련 정책 확인</text><text x="1125" y="266" class="cell">공개 보안정보의 범위는 제한적</text>
+    <rect x="70" y="324" width="1460" height="112" rx="8" fill="#f1f5f9" stroke="#cbd5e1"/><text x="95" y="367" class="label">계정·거래 신뢰</text><text x="95" y="392" class="small">판매자와 상품 보호</text><text x="405" y="362" class="cell">작가 입점·운영 정책 공개</text><text x="405" y="388" class="cell">피싱 주의 안내 확인</text><text x="765" y="362" class="cell">창작자·프로젝트 확인 절차</text><text x="765" y="388" class="cell">거래 신뢰·안전 관련 안내</text><text x="1125" y="362" class="cell">작가 입점 및 상품 운영 정책 확인</text><text x="1125" y="388" class="cell">세부 보안 통제의 공개자료는 제한적</text>
+    <rect x="70" y="446" width="1460" height="112" rx="8" fill="white" stroke="#cbd5e1"/><text x="95" y="489" class="label">취약점·사고 대응</text><text x="95" y="514" class="small">외부 신고와 대응 공개</text><text x="405" y="484" class="cell">공개 취약점 신고 채널</text><text x="405" y="510" class="cell">확인되지 않음</text><text x="765" y="484" class="cell">공개 취약점 신고 채널</text><text x="765" y="510" class="cell">확인되지 않음</text><text x="1125" y="484" class="cell">공개 취약점 신고 채널</text><text x="1125" y="510" class="cell">확인되지 않음</text>
+    <rect x="70" y="568" width="1460" height="90" rx="8" fill="#fff7ed" stroke="#fdba74"/><text x="95" y="605" class="label">분석 시사점</text><text x="405" y="605" class="cell">정책·인증 공개가 신뢰의 출발점</text><text x="765" y="605" class="cell">창작자·프로젝트 검증이 거래 신뢰 강화</text><text x="1125" y="595" class="cell">공개자료가 적을수록 보호 수준을 단정하지 않고</text><text x="1125" y="620" class="cell">서비스 설계 시 필요한 통제를 독립적으로 검토</text>
+  </g>
+  <text x="70" y="714" class="kr label" fill="#1d4ed8">비교 결과를 미담의 네 가지 실행 요구사항으로 전환</text>
+  <rect x="70" y="742" width="345" height="92" rx="14" fill="#eff6ff" stroke="#93c5fd"/><text x="242" y="779" text-anchor="middle" class="kr req">1. Data Flow Map</text><text x="242" y="807" text-anchor="middle" class="kr cell">개인정보·거래정보 흐름과 경계 가시화</text>
+  <rect x="442" y="742" width="345" height="92" rx="14" fill="#f0fdf4" stroke="#86efac"/><text x="614" y="779" text-anchor="middle" class="kr req">2. Seller Security</text><text x="614" y="807" text-anchor="middle" class="kr cell">장인 계정·정산·개인정보 집중 보호</text>
+  <rect x="814" y="742" width="345" height="92" rx="14" fill="#faf5ff" stroke="#d8b4fe"/><text x="986" y="779" text-anchor="middle" class="kr req">3. VDP / Response</text><text x="986" y="807" text-anchor="middle" class="kr cell">취약점 신고와 사고 대응 절차 정의</text>
+  <rect x="1186" y="742" width="345" height="92" rx="14" fill="#fff7ed" stroke="#fdba74"/><text x="1358" y="779" text-anchor="middle" class="kr req">4. Trust Center</text><text x="1358" y="807" text-anchor="middle" class="kr cell">보호 원칙과 대응 현황을 신뢰로 전달</text>
+  <text x="70" y="872" class="kr small">※ 공개자료 기준 비교입니다. 공개 확인이 되지 않은 항목을 실제 미구축 또는 미운영으로 단정하지 않았습니다.</text>
+</svg>

@@ -13,7 +13,7 @@ export function Footer() {
 
           <div className="flex gap-4 items-center">
             <motion.a
-              href="https://github.com/yourusername"
+              href="https://github.com/DowntownCorilla"
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.1, y: -2 }}
@@ -24,7 +24,7 @@ export function Footer() {
               <Github className="w-4 h-4" />
             </motion.a>
             <motion.a
-              href="mailto:your.email@example.com"
+              href="mailto:leeyunje96@gmail.com"
               whileHover={{ scale: 1.1, y: -2 }}
               whileTap={{ scale: 0.95 }}
               className="text-[#c9a77c]/60 hover:text-[#c9a77c] transition-colors"
