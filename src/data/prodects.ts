@@ -5,16 +5,17 @@ export const projects: Project[] = [
     id: "security-saas",
     title: "원클릭 보안점검 SaaS",
     shortTitle: "보안 SaaS",
-    thumbnail: "/security-projects/security-saas.svg",
-    screenshot: "/security-projects/security-saas.svg",
+    thumbnail: "/security-projects/security-saas.svg?v=2",
+    screenshot: "/security-projects/security-saas.svg?v=2",
     role: "Team Lead",
-    teamSize: "3명",
+    teamSize: "4인 팀",
     period: "2026.08 - 진행 중",
     github: "",
     liveUrl: "",
     techStack: [
       "Python",
       "TypeScript",
+      "Next.js",
       "FastAPI",
       "GitHub App",
       "tree-sitter",
@@ -25,26 +26,92 @@ export const projects: Project[] = [
       "rever-browser",
     ],
     overview:
-      "비개발자와 소규모 팀이 GitHub 연결만으로 소스코드, 외부 라이브러리와 실행 중인 서비스를 점검할 수 있도록 자체 SAST·SCA·DAST를 구성하는 보안점검 SaaS입니다. 제품과 전체 아키텍처를 설계하고 핵심 진단 엔진을 구현하고 있습니다.",
+      "비개발자와 소규모 팀이 GitHub 연결만으로 소스코드, 외부 라이브러리와 실행 중인 서비스를 점검하도록 설계한 보안점검 SaaS입니다. GitHub App 연동과 자체 SAST·SCA·DAST, 보고서 생성 경로를 구현해 실제 커머스 코드와 Staging 환경에서 검증했으며, 웹 제품 연동과 운영 배포를 고도화하고 있습니다.",
     contributions: [
       "사용자 문제와 MVP 범위를 정의하고 사용자 화면과 분석 엔진을 분리한 전체 아키텍처 설계",
       "GitHub App 권한으로 비공개 저장소의 소스코드를 전달받아 자동 점검하는 연동 흐름 구현",
       "JS/TS, Java, Python 소스를 AST로 변환하고, Pattern 기반 매칭 모드와 전달 경로까지 탐지하는 Taint 모드의 SAST 엔진 구현",
       "Trivy로 CycloneDX SBOM을 생성하고, 프로젝트가 사용하는 프레임워크와 라이브러리의 의존성 및 알려진 취약점을 점검하는 SCA 엔진 구현",
       "LLM과 브라우저 에이전트로 화면 동작과 네트워크 요청을 분석하고, 소스에서 수집한 API 후보까지 결합해 숨겨진 엔드포인트를 점검하는 DAST 엔진 구현",
-      "rever-browser upstream에 개선 PR 5건 제안: 3건 반영, 2건 수정 요청 대응 중",
+      "자체 엔진을 실제 커머스 프로젝트의 846개 소스 파일, 428개 의존성, 161개 엔드포인트에 적용하고 SAST 검토 후보, SCA 버전 매칭과 DAST 재현 결과를 구분한 통합 보고서 생성",
+      "DAST 구현 중 발견한 rever-browser 결함을 수정해 제출한 PR 5건이 모두 병합되고 v0.1.2에 반영",
     ],
     problems: [
-      "SAST를 서비스에 포함하기 위해 Semgrep과 CodeQL 등을 검토했지만, 라이선스와 이용 조건 때문에 기획한 상용 SaaS의 핵심 엔진으로 그대로 사용하기 어려웠습니다.",
-      "Trivy로 Java 프로젝트를 검사하자 의존성 목록 파일이 없는 저장소에서 결과가 0건으로 나왔습니다. 실제 의존성을 확인하지 못했는데도 안전한 저장소로 오인할 수 있는 상태였습니다.",
-      "브라우저가 화면만 탐색하면 사용자가 직접 실행하지 않은 API를 놓칠 수 있었고, 응답 한 번만으로 판단하면 정상 응답도 취약점으로 분류되는 문제가 있었습니다.",
-      "DAST가 공격 요청을 연속 실행하던 중 rever-browser가 여섯 번째 호출부터 응답하지 않았습니다. 이후 점검 요청도 실행되지 않아 전체 진단이 중단됐습니다.",
+      "검토한 Semgrep과 CodeQL의 라이선스와 이용 조건상 기획한 상용 SaaS의 핵심 엔진으로 그대로 적용하기 어려움",
+      "Gradle lockfile이 없는 Java 저장소에서 Trivy 결과가 0건으로 나와 미검출을 안전한 상태로 오인할 수 있음",
+      "브라우저 화면 탐색만으로는 사용자 이벤트가 발생하지 않은 API를 놓치고, 단일 응답만으로는 정상 동작을 취약점으로 오판할 수 있음",
+      "연속 공격 요청 중 rever-browser가 여섯 번째 호출부터 응답하지 않아 전체 DAST 진단이 중단됨",
     ],
     solutions: [
       "JS/TS, Java, Python 소스를 AST로 변환하고, Pattern 기반 매칭 모드와 전달 경로까지 탐지하는 Taint 모드를 직접 설계·구현했습니다.",
       "1차 점검 결과가 0건이면 격리 환경에서 프로젝트를 빌드해 실제 의존성 목록을 만든 뒤 다시 검사하도록 보완하고 실제 저장소에서 검증했습니다.",
       "소스에서 찾은 API 후보와 브라우저에서 실제 발생한 요청을 결합했습니다. 판단이 어려운 결과는 LLM이 맥락을 분석하고 공격 요청과 정상 요청을 다시 실행해 같은 차이가 재현될 때만 확정했습니다.",
-      "각 작업의 상태 표시를 320ms 뒤 삭제하는 동안 다음 호출이 시작되자, 요소 수가 줄어들기를 기다리던 반복문이 무한 루프에 빠지는 것을 확인했습니다. 반복 대기를 한 번의 조건 검사로 바꿔 해결하고 8회 연속 호출과 취약 앱 2종에서 재검증했습니다. 관련 개선을 포함해 upstream에 PR 5건을 제안했고 3건이 반영됐으며 2건은 수정 요청에 대응 중입니다.",
+      "상태 표시를 비동기로 삭제하는 처리와 동기 반복문이 충돌해 무한 루프가 발생하는 원인을 찾았습니다. 반복 대기를 단일 조건 검사로 바꾸고 8회 연속 호출과 취약 앱 2종에서 재검증했습니다. 이후 요청 타임아웃, HAR 내보내기와 응답 헤더 수집 문제까지 개선해 오픈소스 라이브러리 rever-browser에 제출한 PR 5건이 모두 반영되었습니다.",
+    ],
+    gallery: [
+      {
+        src: "/security-projects/evidence/security-saas-engine-validation.svg",
+        alt: "원클릭 보안점검 SaaS의 SAST, SCA, DAST 실제 적용 범위와 결과 요약",
+        caption:
+          "실제 커머스 코드와 Staging 환경에 세 엔진을 적용한 범위와 결과를 코드 검토 후보, 의존성 버전 매칭, 동적 재현 확인으로 구분한 자료",
+      },
+    ],
+  },
+  {
+    id: "rever-browser-contribution",
+    title: "rever-browser 오픈소스 기여",
+    shortTitle: "rever-browser",
+    thumbnail:
+      "/security-projects/evidence/rever-browser-v012-release.png",
+    screenshot:
+      "/security-projects/evidence/rever-browser-v012-release.png",
+    role: "Open Source Contributor",
+    teamSize: "개인 기여",
+    period: "2026.09 - 2026.10",
+    github: "https://github.com/greekr4/rever-browser",
+    liveUrl: "https://github.com/greekr4/rever-browser/releases/tag/v0.1.2",
+    techStack: [
+      "TypeScript",
+      "Electron",
+      "MCP",
+      "Chrome DevTools Protocol",
+      "HAR",
+    ],
+    overview:
+      "원클릭 보안점검 SaaS의 DAST 엔진에 rever-browser를 적용하던 중 스캔 중단과 결과 누락을 일으키는 결함을 발견했습니다. 실제 스캔에서 재현한 문제를 원인 분석하고 수정해 PR 5건으로 제출했으며, 모두 저장소의 첫 외부 기여로 병합되어 v0.1.2에 반영됐습니다.",
+    contributions: [
+      "실제 DAST 스캔을 멈추거나 결과를 누락시키는 결함 5건을 재현하고 원인을 분석해 수정",
+      "페이지를 멈추게 하던 반복 처리와 응답 없는 요청이 브라우저 연결을 점유하던 문제 해결",
+      "일부 잘못된 URL 때문에 HAR 전체 내보내기가 실패하던 문제를 항목 단위로 격리",
+      "대용량 HAR를 누락과 중복 없이 나눠 가져오도록 커서 기반 페이지네이션 구현",
+      "브라우저 이벤트를 병합해 누락되던 Set-Cookie 등 응답 헤더 수집 복구",
+      "유지관리자의 리뷰와 엣지 케이스 재현 결과를 반영해 수정안을 보완하고 회귀 테스트 추가",
+    ],
+    problems: [
+      "상태 표시를 지우는 비동기 처리와 동기 반복문이 충돌해 연속 호출 시 페이지가 멈춤",
+      "응답을 끝내지 않는 대상에 요청하면 연결이 반환되지 않아 이후 진단까지 대기 상태에 빠짐",
+      "파싱할 수 없는 URL이나 대용량 결과 하나 때문에 HAR 전체 내보내기가 실패하거나 끊김",
+      "일반 응답 이벤트만 수집해 보안 속성 판단에 필요한 Set-Cookie 헤더가 누락됨",
+    ],
+    solutions: [
+      "한 번의 호출에서 추가되는 항목 수에 맞춰 반복문을 단일 조건 검사로 바꾸고 연속 호출로 재검증했습니다.",
+      "요청에 제한 시간을 두고 초과 시 연결을 확실히 종료하도록 수정해 이후 진단이 계속 진행되도록 했습니다.",
+      "문제가 있는 URL만 건너뛰고, 대용량 HAR는 바이트 크기를 기준으로 나눠 이어받도록 커서 기반 페이지네이션을 구현했습니다.",
+      "도착 순서가 일정하지 않은 두 브라우저 이벤트를 상태 코드와 리다이렉트 흐름까지 대조해 병합하고 누락된 응답 헤더를 복구했습니다.",
+    ],
+    gallery: [
+      {
+        src: "/security-projects/evidence/rever-browser-prs-merged.png",
+        alt: "rever-browser에 제출한 PR 5건이 모두 병합된 화면",
+        caption:
+          "실제 DAST 사용 중 발견한 결함을 수정해 제출한 PR 5건이 모두 병합된 기록",
+      },
+      {
+        src: "/security-projects/evidence/rever-browser-commits.png",
+        alt: "rever-browser main 브랜치에 반영된 기여 커밋",
+        caption:
+          "PR 5건의 변경사항이 원본 저장소 main 브랜치에 반영된 커밋 기록",
+      },
     ],
   },
   {

@@ -19,6 +19,8 @@ const SECURITY_PROJECT_IDS = new Set([
   "kisa-disclosure",
 ]);
 
+const OPEN_SOURCE_PROJECT_IDS = new Set(["rever-browser-contribution"]);
+
 function TechStackRow({
   techStack,
   onMore,
@@ -181,12 +183,29 @@ function KeyContributions({
 
 export function ProjectsSection({ onProjectClick }: ProjectsSectionProps) {
   const [liveNotice, setLiveNotice] = useState<string | null>(null);
-  const indexedProjects = projects.map((project, index) => ({ project, index }));
+  const orderedProjects = [
+    ...projects.filter((project) => SECURITY_PROJECT_IDS.has(project.id)),
+    ...projects.filter((project) => OPEN_SOURCE_PROJECT_IDS.has(project.id)),
+    ...projects.filter(
+      (project) =>
+        !SECURITY_PROJECT_IDS.has(project.id) &&
+        !OPEN_SOURCE_PROJECT_IDS.has(project.id)
+    ),
+  ];
+  const indexedProjects = orderedProjects.map((project, index) => ({
+    project,
+    index,
+  }));
   const securityProjects = indexedProjects.filter(({ project }) =>
     SECURITY_PROJECT_IDS.has(project.id)
   );
+  const openSourceProjects = indexedProjects.filter(({ project }) =>
+    OPEN_SOURCE_PROJECT_IDS.has(project.id)
+  );
   const webProjects = indexedProjects.filter(
-    ({ project }) => !SECURITY_PROJECT_IDS.has(project.id)
+    ({ project }) =>
+      !SECURITY_PROJECT_IDS.has(project.id) &&
+      !OPEN_SOURCE_PROJECT_IDS.has(project.id)
   );
 
   const renderProjectButton = (project: Project, index: number) => (
@@ -257,6 +276,16 @@ export function ProjectsSection({ onProjectClick }: ProjectsSectionProps) {
                 </div>
                 <div>
                   <div className="mb-2 font-mono text-[clamp(0.65rem,1vw,0.8rem)] text-[#c9a77c]/80 tracking-wider">
+                    [ OPEN SOURCE CONTRIBUTION ]
+                  </div>
+                  <div className="grid grid-cols-1 gap-2 md:max-w-sm md:gap-3">
+                    {openSourceProjects.map(({ project, index }) =>
+                      renderProjectButton(project, index)
+                    )}
+                  </div>
+                </div>
+                <div>
+                  <div className="mb-2 font-mono text-[clamp(0.65rem,1vw,0.8rem)] text-[#c9a77c]/80 tracking-wider">
                     [ WEB DEVELOPMENT PROJECTS ]
                   </div>
                   <div className="grid grid-cols-3 md:grid-cols-4 gap-2 md:gap-3">
@@ -276,7 +305,7 @@ export function ProjectsSection({ onProjectClick }: ProjectsSectionProps) {
       </div>
 
       {/* Project Detail Panels */}
-      {projects.map((project, index) => (
+      {orderedProjects.map((project, index) => (
         <div
           key={project.id}
           className="section-panel h-screen py-[clamp(48px,6vh,80px)] pb-[clamp(48px,6vh,80px)] bg-black w-screen flex-shrink-0 flex items-center justify-center px-[0px]"
