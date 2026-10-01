@@ -121,8 +121,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
+    <html lang="ko-KR" translate="no" className="notranslate">
       <head>
+        <meta name="google" content="notranslate" />
+        <meta httpEquiv="content-language" content="ko-KR" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
