@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">미담 DAST 탐지와 재현 검증 흐름</title>
+  <desc id="desc">브라우저 탐색과 엔드포인트 후보 수집, 결정론적 점검, LLM 맥락 분석과 재현 검증으로 이어지는 흐름</desc>
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="15" flood-color="#183253" flood-opacity="0.10"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#91a1b8"/>
+    </marker>
+  </defs>
+
+  <rect width="1600" height="1000" fill="#f7f8fb"/>
+  <rect x="0" y="0" width="1600" height="14" fill="#263b59"/>
+
+  <g font-family="Pretendard, Apple SD Gothic Neo, Noto Sans KR, sans-serif">
+    <text x="90" y="92" font-size="22" font-weight="700" letter-spacing="5" fill="#64748b">DAST VALIDATION FLOW</text>
+    <text x="90" y="158" font-size="46" font-weight="800" fill="#17233a">탐지 범위 확장과 재현 검증</text>
+    <text x="90" y="203" font-size="23" fill="#637087">관측된 요청에만 의존하지 않고 후보를 확장한 뒤, 같은 조건에서 다시 검증했습니다.</text>
+
+    <rect x="90" y="250" width="1420" height="110" rx="18" fill="#263b59"/>
+    <text x="132" y="296" font-size="18" font-weight="700" fill="#a9bad0">검증 범위</text>
+    <text x="132" y="334" font-size="28" font-weight="800" fill="#ffffff">161개 엔드포인트</text>
+    <line x1="434" y1="276" x2="434" y2="336" stroke="#596b84"/>
+    <text x="478" y="296" font-size="18" font-weight="700" fill="#a9bad0">평가 조합</text>
+    <text x="478" y="334" font-size="28" font-weight="800" fill="#ffffff">1,032개 타깃</text>
+    <line x1="760" y1="276" x2="760" y2="336" stroke="#596b84"/>
+    <text x="804" y="296" font-size="18" font-weight="700" fill="#a9bad0">안전 장치</text>
+    <text x="804" y="334" font-size="27" font-weight="800" fill="#ffffff">Staging 분리 · 테스트 계정 2개</text>
+
+    <g filter="url(#shadow)">
+      <rect x="90" y="442" width="252" height="240" rx="22" fill="#ffffff"/>
+      <rect x="382" y="442" width="252" height="240" rx="22" fill="#ffffff"/>
+      <rect x="674" y="442" width="252" height="240" rx="22" fill="#ffffff"/>
+      <rect x="966" y="442" width="252" height="240" rx="22" fill="#ffffff"/>
+      <rect x="1258" y="442" width="252" height="240" rx="22" fill="#ffffff"/>
+    </g>
+
+    <g fill="none" stroke="#91a1b8" stroke-width="3" marker-end="url(#arrow)">
+      <path d="M342 562 H370"/>
+      <path d="M634 562 H662"/>
+      <path d="M926 562 H954"/>
+      <path d="M1218 562 H1246"/>
+    </g>
+
+    <g>
+      <circle cx="136" cy="492" r="25" fill="#e7eef8"/>
+      <text x="136" y="501" text-anchor="middle" font-size="21" font-weight="800" fill="#34557e">01</text>
+      <text x="126" y="551" font-size="25" font-weight="800" fill="#17233a">Discovery</text>
+      <text x="126" y="594" font-size="19" fill="#637087">브라우저에서 발생한</text>
+      <text x="126" y="625" font-size="19" fill="#637087">동적 요청을 수집</text>
+      <text x="126" y="657" font-size="18" fill="#8792a3">로그인 포함 실제 탐색</text>
+    </g>
+
+    <g>
+      <circle cx="428" cy="492" r="25" fill="#e7eef8"/>
+      <text x="428" y="501" text-anchor="middle" font-size="21" font-weight="800" fill="#34557e">02</text>
+      <text x="418" y="551" font-size="25" font-weight="800" fill="#17233a">후보 보완</text>
+      <text x="418" y="594" font-size="19" fill="#637087">명세와 번들에서 찾은</text>
+      <text x="418" y="625" font-size="19" fill="#637087">엔드포인트 후보 결합</text>
+      <text x="418" y="657" font-size="18" fill="#8792a3">화면 밖 경로의 미탐 보완</text>
+    </g>
+
+    <g>
+      <circle cx="720" cy="492" r="25" fill="#e9f4ef"/>
+      <text x="720" y="501" text-anchor="middle" font-size="21" font-weight="800" fill="#287258">03</text>
+      <text x="710" y="551" font-size="25" font-weight="800" fill="#17233a">1차 점검</text>
+      <text x="710" y="594" font-size="19" fill="#637087">인증·인젝션·헤더</text>
+      <text x="710" y="625" font-size="19" fill="#637087">결정론적 프로브 수행</text>
+      <text x="710" y="657" font-size="18" fill="#8792a3">기준 응답과 차이 비교</text>
+    </g>
+
+    <g>
+      <circle cx="1012" cy="492" r="25" fill="#fff1e5"/>
+      <text x="1012" y="501" text-anchor="middle" font-size="21" font-weight="800" fill="#b85c23">04</text>
+      <text x="1002" y="551" font-size="25" font-weight="800" fill="#17233a">후속 분석</text>
+      <text x="1002" y="594" font-size="19" fill="#637087">판단이 모호한 결과를</text>
+      <text x="1002" y="625" font-size="19" fill="#637087">LLM이 맥락 기반 분석</text>
+      <text x="1002" y="657" font-size="18" fill="#8792a3">요청·응답 근거 비교</text>
+    </g>
+
+    <g>
+      <circle cx="1304" cy="492" r="25" fill="#f1ebfa"/>
+      <text x="1304" y="501" text-anchor="middle" font-size="21" font-weight="800" fill="#6f4ca5">05</text>
+      <text x="1294" y="551" font-size="25" font-weight="800" fill="#17233a">재현 확인</text>
+      <text x="1294" y="594" font-size="19" fill="#637087">공격·대조 요청을</text>
+      <text x="1294" y="625" font-size="19" fill="#637087">다시 실행해 판단 확정</text>
+      <text x="1294" y="657" font-size="18" fill="#8792a3">확인 / 추가 검토 분리</text>
+    </g>
+
+    <rect x="90" y="758" width="1420" height="154" rx="20" fill="#eef2f7"/>
+    <text x="128" y="811" font-size="21" font-weight="800" fill="#2f435f">판정 원칙</text>
+    <text x="128" y="854" font-size="21" fill="#43546c">단일 응답이나 도구 경고를 그대로 취약점으로 확정하지 않고, 정상 조건과 비교해 같은 차이가 재현되는지 확인했습니다.</text>
+    <text x="128" y="889" font-size="19" fill="#728096">민감한 호스트명, 엔드포인트와 취약점 세부 사항은 포트폴리오용 자료에서 제외했습니다.</text>
+  </g>
+</svg>

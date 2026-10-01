@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
-  <title id="title">미담 공예 커머스 Level 0 위협 모델링</title>
+  <title id="title">미담 공예 커머스 데이터 흐름 및 신뢰 경계</title>
   <desc id="desc">구매자, 장인, 관리자에서 서비스, 애플리케이션, 데이터 저장소와 외부 서비스로 이어지는 F-01부터 F-17까지의 데이터 흐름과 신뢰 경계</desc>
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#475569"/></marker>
@@ -8,8 +8,8 @@
     <style>.kr{font-family:Pretendard,'Noto Sans KR',Arial,sans-serif}.title{font-size:34px;font-weight:800;fill:#0f172a}.sub{font-size:16px;fill:#475569}.tb{font-size:15px;font-weight:800}.boxTitle{font-size:18px;font-weight:750;fill:#0f172a}.boxSub{font-size:14px;fill:#475569}.flow{font-size:12px;font-weight:700;fill:#334155}.line{fill:none;stroke:#475569;stroke-width:2.2;marker-end:url(#arrow)}.primary{fill:none;stroke:#2563eb;stroke-width:3;marker-end:url(#arrowBlue)}.return{fill:none;stroke:#7c3aed;stroke-width:2.3;stroke-dasharray:8 6;marker-end:url(#arrow)}</style>
   </defs>
   <rect width="1600" height="900" fill="#f8fafc"/>
-  <text x="70" y="62" class="kr title">미담 공예 커머스 위협 모델링 — Level 0 DFD</text>
-  <text x="70" y="92" class="kr sub">행위자·서비스·데이터·외부 연동을 6개 신뢰 경계로 구분하고 주요 요청 흐름을 F-01~F-17로 식별</text>
+  <text x="70" y="62" class="kr title">미담 공예 커머스 데이터 흐름 및 신뢰 경계</text>
+  <text x="70" y="92" class="kr sub">주요 행위자와 시스템 구성요소 사이의 데이터 흐름을 DFD로 도식화하고 보안 검토가 필요한 신뢰 경계를 식별</text>
 
   <rect x="55" y="125" width="240" height="690" rx="18" fill="#fff7ed" stroke="#fb923c" stroke-width="2" stroke-dasharray="9 7"/>
   <text x="75" y="155" class="kr tb" fill="#c2410c">TB-01  인터넷 / 비신뢰 영역</text>

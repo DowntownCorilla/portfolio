@@ -96,8 +96,8 @@ export const projects: Project[] = [
     id: "va-mcp",
     title: "VA-MCP - 개발 단계 API 보안점검",
     shortTitle: "VA-MCP",
-    thumbnail: "/security-projects/va-mcp.svg",
-    screenshot: "/security-projects/va-mcp.svg",
+    thumbnail: "/security-projects/va-mcp.svg?v=2",
+    screenshot: "/security-projects/va-mcp.svg?v=2",
     role: "Team Lead",
     teamSize: "4명",
     period: "2026.04 - 2026.06",
@@ -114,7 +114,7 @@ export const projects: Project[] = [
       "AWS",
     ],
     overview:
-      "AI 에이전트가 구현과 기능 테스트를 마친 뒤 API 보안점검까지 이어가도록 설계한 MCP 서버입니다. API의 인증, 권한과 상태 정보를 공통 형식으로 정리해 OWASP Top 10 기반의 공격 시나리오를 선택하고, Python 도구가 제한된 범위에서 실제 점검 요청을 보내도록 구성했습니다.",
+      "AI-Native 개발은 기획과 문서화, 구현, 기능 테스트 순서로 마무리되는 경우가 많습니다. VA-MCP는 이 흐름의 마지막에 보안점검을 추가하기 위해, 에이전트가 전달한 엔드포인트 맥락을 MCP로 받아 OWASP Top 10 기반의 점검 시나리오와 도구를 선택하고 실제 요청까지 수행하도록 만든 API 보안점검 서버입니다.",
     contributions: [
       "팀장 겸 개발자로 문제 정의, 전체 아키텍처와 역할 분배 주도",
       "AI 에이전트가 전달한 API 엔드포인트의 인증, 권한과 상태 정보를 공통 형식으로 정리하고 검증하는 입력 처리 구현",
@@ -124,13 +124,13 @@ export const projects: Project[] = [
       "SQL Injection, IDOR와 BFLA를 의도적으로 포함한 수강신청 실습 웹을 제작하고 CTF 방식으로 점검 결과 검증",
     ],
     problems: [
-      "일반 URL 크롤링만으로 개발 중 API의 역할, 소유권과 상태 흐름을 파악하기 어려움",
+      "점검 기능을 하나의 흐름에 강하게 결합하면 한 모듈을 고도화할 때 다른 단계까지 영향을 받고, 모든 엔드포인트에 모든 도구를 실행하면 맥락과 무관한 검사로 정확도가 떨어질 수 있었습니다.",
       "규칙 기반 점검만으로 복잡한 인증 흐름과 비즈니스 로직 취약점을 판단하기 어려움",
       "LLM이 실제 요청까지 직접 수행하면 실행 범위와 결과 재현을 통제하기 어려움",
       "외부 서비스에 영향을 주지 않고 점검 도구의 동작을 증명할 검증 환경이 필요함",
     ],
     solutions: [
-      "에이전트가 전달한 API 명세를 인증, 권한과 상태 정보가 포함된 공통 형식으로 정리하고, 각 API의 특징에 맞는 점검 후보와 실행 도구를 선택하도록 설계했습니다.",
+      "입력 정규화, 특징 추출, 시나리오 선택, 실행과 보고를 독립 모듈로 분리했습니다. Planner가 엔드포인트 맥락에 맞는 도구만 골라 인증 API에는 인증 점검을, 리소스 식별자와 다중 권한 정보가 있는 API에는 접근제어 점검을 실행하도록 구성했습니다.",
       "역할별 인증 정보와 정상 응답을 먼저 수집한 뒤 LLM이 권한 계층과 리소스 소유관계를 해석해 후속 점검을 결정하도록 구성했습니다.",
       "복잡한 맥락과 후속 판단은 LLM이 담당하고 실제 HTTP 요청은 제한된 Python 도구가 수행하도록 역할을 분리했습니다.",
       "의도적으로 취약한 수강신청 웹을 구성하고 CTF 방식으로 FLAG를 확인하며 점검 흐름을 검증했습니다.",
@@ -139,7 +139,7 @@ export const projects: Project[] = [
   {
     id: "midam-security",
     title: "미담 - 커머스 위협 모델링 및 보안점검",
-    shortTitle: "미담 보안",
+    shortTitle: "미담",
     thumbnail: "/security-projects/midam-threat-model.svg",
     screenshot: "/security-projects/midam-threat-model.svg",
     role: "보안이슈 검토, 보안 검수",
@@ -150,35 +150,36 @@ export const projects: Project[] = [
     techStack: [
       "DFD",
       "STRIDE",
-      "PCI DSS",
-      "ISMS",
       "Trivy",
+      "CycloneDX",
+      "LLM",
+      "rever-browser",
     ],
     overview:
-      "구매자, 장인, 관리자와 결제·배송 서비스가 연결되는 공예 커머스의 기획 단계 보안 이슈 검토와 구현 단계 보안점검을 담당했습니다. 팀 조사 자료를 종합해 위협 모델링과 MVP 보안 요구사항을 만들고 자체 SAST·SCA를 실제 코드에 적용했습니다.",
+      "구매자, 장인, 관리자와 결제·배송 서비스가 연결되는 공예 커머스의 기획 단계 보안 이슈 검토와 구현 단계 보안검수를 담당했습니다. DFD·STRIDE 기반 위협 모델링으로 MVP 보안 요구사항을 정리하고, 자체 SAST·SCA·DAST를 실제 코드와 Staging 환경에 적용했습니다.",
     contributions: [
       "경쟁 서비스 조사 결과를 종합해 컴플라이언스, 계정, 거래 신뢰와 사고대응 비교 분석 작성",
       "DFD로 구매자, 장인, 관리자와 외부 서비스 사이의 계정, 주문, 결제와 정산 데이터 흐름 및 신뢰 경계 시각화",
       "STRIDE로 계정 탈취, IDOR/BOLA, 정산계좌 탈취와 결제 위변조 등의 위협 시나리오 도출",
       "위험 발생 가능성과 서비스 영향을 기준으로 대응 우선순위를 정하고 개발 파트별 보안 요구사항 전달",
-      "자체 SAST와 Trivy 기반 SCA를 실제 코드에 적용하고 발견한 취약점의 재현 근거와 개선 방향을 개발팀에 전달",
+      "자체 SAST·SCA를 코드에 적용하고 본 서비스와 동일한 구조의 Staging 환경에서 DAST를 수행해 발견 사항의 재현 근거와 개선 방향을 개발팀에 전달",
     ],
     problems: [
-      "일반적인 이커머스 보안 목록만으로 개인 장인과 정산 구조의 위험을 설명하기 어려움",
-      "도출된 모든 보안 요구사항을 MVP 일정 안에 반영하기 어려움",
-      "암호화와 토큰·권한 관리를 적용한 코드에서도 자동 점검 후 취약점이 확인됨",
+      "DAST는 실제 공격 요청을 보내므로 운영 환경에서 실행하면 DB 데이터 오염이나 서비스 장애를 일으킬 수 있음",
+      "IDOR은 서로 다른 사용자의 권한과 소유관계를 비교해야 하므로 단일 계정으로는 정확히 검증하기 어려움",
+      "자체 SAST의 Java AST 파서를 검증할 실제 Spring 프로젝트가 없어 파싱 정확도를 확인하기 어려움",
     ],
     solutions: [
-      "행위자, 자산, 신뢰 경계와 데이터 흐름을 먼저 정의하고 장인 계정이 상품·주문·정산에 연결되는 구조를 위협 시나리오에 반영했습니다.",
-      "DFD 위치와 영향도를 기준으로 계정 탈취, 정산계좌 변경, IDOR/BOLA와 결제 위변조를 P0로 선정했습니다.",
-      "설계 체크리스트에 그치지 않고 자체 SAST·SCA를 실제 코드에 적용해 재현 근거와 개선 방향을 개발팀에 전달했습니다.",
+      "인프라 파트와 협업해 본 서비스와 동일한 구조를 축소한 Staging 서버를 구축하고 운영 데이터와 분리된 환경에서 DAST를 수행했습니다.",
+      "백엔드 파트와 협업해 소유 리소스가 다른 보안검수용 계정 2개를 발급받고, 서로 다른 토큰으로 동일 리소스 요청을 비교해 IDOR을 검증했습니다.",
+      "백엔드 파트에서 Java Spring 저장소 2개를 제공받아 실제 코드로 AST 파싱 테스트를 수행하고 파서의 지원 범위를 검증했습니다.",
     ],
     gallery: [
       {
         src: "/security-projects/midam-threat-model.svg",
-        alt: "미담 공예 커머스 Level 0 데이터 흐름과 신뢰 경계 위협 모델링",
+        alt: "미담 공예 커머스 데이터 흐름과 신뢰 경계 위협 모델링",
         caption:
-          "구매자, 장인, 관리자부터 애플리케이션, 데이터 저장소와 외부 서비스까지의 F-01~F-17 흐름을 신뢰 경계별로 정리한 Level 0 DFD",
+          "주요 행위자와 시스템 구성요소 사이의 데이터 흐름을 DFD로 도식화하고 보안 검토가 필요한 신뢰 경계를 식별한 자료",
       },
       {
         src: "/security-projects/evidence/midam-security-strategy.svg",
@@ -191,6 +192,18 @@ export const projects: Project[] = [
         alt: "공예 커머스 경쟁 서비스의 공개 보안정보 비교 분석 요약",
         caption:
           "아이디어스, 텀블벅, 공예정원의 공개자료를 정책, 인증, 컴플라이언스와 취약점 신고 관점에서 비교해 보안 요구사항으로 연결한 분석",
+      },
+      {
+        src: "/security-projects/evidence/midam-scan-summary.svg",
+        alt: "미담 통합 보안점검 범위와 결과 요약",
+        caption:
+          "SAST, SCA와 DAST의 점검 범위 및 결과를 검토 후보, 버전 매칭과 재현 확인으로 구분해 정리한 포트폴리오용 요약",
+      },
+      {
+        src: "/security-projects/evidence/midam-dast-flow.svg",
+        alt: "미담 DAST 탐지와 재현 검증 흐름",
+        caption:
+          "브라우저 관측과 엔드포인트 후보를 결합하고 결정론적 점검, LLM 후속 분석과 재현 확인으로 이어지는 DAST 검증 흐름",
       },
     ],
   },
@@ -207,12 +220,7 @@ export const projects: Project[] = [
     period: "2026.05",
     github: "",
     liveUrl: "",
-    techStack: [
-      "Web Security",
-      "SQL Error Analysis",
-      "Input Validation",
-      "Responsible Disclosure",
-    ],
+    techStack: ["-"],
     overview:
       "실제 웹사이트의 게시글 조회 파라미터에 비정상 입력을 전달해 SQL 오류와 내부 쿼리·테이블·일부 컬럼 정보 노출을 재현했습니다. 데이터 추출이나 변조 없이 영향 범위와 개선안을 정리해 KISA에 제보하고 KNVD에서 신고 처리 이력을 확인했습니다.",
     contributions: [

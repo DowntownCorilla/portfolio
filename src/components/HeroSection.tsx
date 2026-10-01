@@ -32,20 +32,21 @@ export function HeroSection() {
             transition={{ duration: 0.8 }}
             className="mb-6 md:mb-8"
           >
-            <div className="text-[#c9a77c] text-xs md:text-sm mb-2 tracking-widest">
+            <div className="mb-3 text-xs tracking-widest text-[#c9a77c] md:mb-4 md:text-sm">
               [ SYSTEM INITIALIZED ]
             </div>
-            <div className="border-2 border-[#c9a77c] inline-block p-1 mb-4">
-              <div className="border border-[#c9a77c] px-3 md:px-4 py-2">
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-3 font-mono text-[0.65rem] md:text-xs tracking-wider">
-                  <span className="text-[#c9a77c]/60">
-                    FRONTEND_DEV_v1.0
-                  </span>
-                  <span className="text-[#c9a77c] retro-text">
-                    SECURITY_ENGINEER_v2.0
-                  </span>
+            <div className="relative inline-block mb-4 pt-3">
+              <div className="absolute left-4 top-0 z-10 bg-black px-2 font-mono text-[0.58rem] tracking-[0.16em] text-[#c9a77c]/55 sm:left-6 sm:text-[0.68rem]">
+                FRONTEND_DEVELOPER_v1.0
+              </div>
+              <div className="relative border border-[#c9a77c]/70 bg-black/75 px-5 py-3 sm:px-8 md:px-10 md:py-3.5">
+                <div className="absolute left-0 top-0 h-px w-4 bg-black sm:w-6" />
+                <div className="font-mono text-[0.74rem] tracking-[0.12em] text-[#c9a77c] retro-text whitespace-nowrap sm:text-sm md:text-base">
+                  SECURITY_ENGINEER_v2.0
                 </div>
               </div>
+              <div className="absolute -bottom-1.5 right-4 h-px w-12 bg-[#c9a77c]/45" />
+              <div className="absolute -bottom-1.5 right-4 h-3 w-px bg-[#c9a77c]/45" />
             </div>
           </motion.div>
 

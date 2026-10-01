@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
   X,
@@ -27,7 +27,54 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
   const [liveNoticeOpen, setLiveNoticeOpen] = useState(false);
   const [galleryIndex, setGalleryIndex] = useState<number | null>(null);
+  const [slideDirection, setSlideDirection] = useState(0);
   const gallery = project.gallery || [];
+  const viewerImages = useMemo(() => {
+    const images = [
+      {
+        src: project.screenshot,
+        alt: project.title,
+        caption: `${project.title} 대표 이미지`,
+      },
+      ...(project.gallery || []),
+      ...(project.evidence || []),
+    ];
+
+    return images.reduce<typeof images>((unique, image) => {
+      const duplicateIndex = unique.findIndex((item) => item.src === image.src);
+      if (duplicateIndex >= 0) {
+        unique[duplicateIndex] = image;
+      } else {
+        unique.push(image);
+      }
+      return unique;
+    }, []);
+  }, [project]);
+
+  const getViewerIndex = (src: string) =>
+    viewerImages.findIndex((image) => image.src === src);
+
+  const openViewer = (index: number) => {
+    if (index < 0) return;
+    setSlideDirection(0);
+    setGalleryIndex(index);
+  };
+
+  const showPreviousImage = () => {
+    setSlideDirection(-1);
+    setGalleryIndex((current) =>
+      current === null
+        ? null
+        : (current - 1 + viewerImages.length) % viewerImages.length,
+    );
+  };
+
+  const showNextImage = () => {
+    setSlideDirection(1);
+    setGalleryIndex((current) =>
+      current === null ? null : (current + 1) % viewerImages.length,
+    );
+  };
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -37,25 +84,29 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
   }, []);
 
   useEffect(() => {
-    if (galleryIndex === null || gallery.length === 0) return;
+    if (galleryIndex === null || viewerImages.length === 0) return;
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") setGalleryIndex(null);
       if (event.key === "ArrowLeft") {
+        setSlideDirection(-1);
         setGalleryIndex((current) =>
-          current === null ? null : (current - 1 + gallery.length) % gallery.length,
+          current === null
+            ? null
+            : (current - 1 + viewerImages.length) % viewerImages.length,
         );
       }
       if (event.key === "ArrowRight") {
+        setSlideDirection(1);
         setGalleryIndex((current) =>
-          current === null ? null : (current + 1) % gallery.length,
+          current === null ? null : (current + 1) % viewerImages.length,
         );
       }
     };
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [galleryIndex, gallery.length]);
+  }, [galleryIndex, viewerImages.length]);
 
   const toggleExpand = (index: number) => {
     setExpandedIndex(expandedIndex === index ? null : index);
@@ -82,19 +133,28 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
           <button
             onClick={onClose}
             className="absolute top-2 md:top-4 right-2 md:right-4 z-10 p-2 bg-black border border-[#c9a77c] hover:bg-[#c9a77c] hover:text-black transition-colors font-mono"
+            aria-label="프로젝트 상세 닫기"
           >
             <X className="w-4 h-4 md:w-5 md:h-5" />
           </button>
 
           <div className="overflow-y-auto max-h-[90vh] custom-scrollbar">
-            <div className="relative h-48 md:h-64 lg:h-72 overflow-hidden border-b border-[#c9a77c]/30 bg-black">
+            <button
+              type="button"
+              onClick={() => openViewer(0)}
+              className="group relative block h-48 w-full cursor-zoom-in overflow-hidden border-b border-[#c9a77c]/30 bg-black md:h-64 lg:h-72"
+              aria-label={`${project.title} 대표 이미지 크게 보기`}
+            >
               <img
                 src={project.screenshot}
                 alt={project.title}
-                className="w-full h-full object-contain object-center opacity-85 p-2 md:p-4"
+                className="h-full w-full object-contain object-center p-2 opacity-85 transition-opacity group-hover:opacity-100 md:p-4"
               />
               <div className="absolute inset-0 scanlines opacity-20" />
-            </div>
+              <span className="absolute bottom-3 right-3 flex items-center gap-2 rounded-md bg-slate-950/85 px-3 py-2 font-mono text-xs text-white opacity-0 transition-opacity group-hover:opacity-100">
+                <Maximize2 className="h-4 w-4" /> 확대
+              </span>
+            </button>
 
             <div className="p-4 md:p-6 lg:px-8 lg:py-6 border-b-2 border-[#c9a77c]/30">
               <div className="text-[#c9a77c]/60 font-mono text-xs mb-2">
@@ -222,7 +282,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                       >
                         <button
                           type="button"
-                          onClick={() => setGalleryIndex(index)}
+                          onClick={() => openViewer(getViewerIndex(item.src))}
                           className="group relative block w-full cursor-zoom-in bg-[#f5f7fa]"
                           aria-label={`${item.alt} 크게 보기`}
                         >
@@ -255,18 +315,21 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                         key={item.src}
                         className="overflow-hidden border-2 border-[#c9a77c]/30 bg-[#080808]"
                       >
-                        <a
-                          href={item.src}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="block bg-white"
+                        <button
+                          type="button"
+                          onClick={() => openViewer(getViewerIndex(item.src))}
+                          className="group relative block w-full cursor-zoom-in bg-white"
+                          aria-label={`${item.alt} 크게 보기`}
                         >
                           <img
                             src={item.src}
                             alt={item.alt}
                             className="w-full aspect-[16/10] object-contain object-center"
                           />
-                        </a>
+                          <span className="absolute right-3 top-3 flex items-center gap-2 rounded-md bg-slate-950/80 px-3 py-2 font-mono text-xs text-white opacity-0 transition-opacity group-hover:opacity-100">
+                            <Maximize2 className="h-4 w-4" /> 확대
+                          </span>
+                        </button>
                         <figcaption className="p-3 font-mono text-xs leading-relaxed text-[#c9a77c]/75 border-t border-[#c9a77c]/20">
                           {item.caption}
                         </figcaption>
@@ -462,34 +525,32 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
         </motion.div>
 
         <AnimatePresence>
-          {galleryIndex !== null && gallery[galleryIndex] && (
+          {galleryIndex !== null && viewerImages[galleryIndex] && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-[80] flex items-center justify-center bg-slate-950/95 p-3 md:p-8"
+              className="fixed inset-0 z-[80] flex items-center justify-center bg-black/95 p-3 md:p-8"
               onClick={() => setGalleryIndex(null)}
             >
               <button
                 type="button"
                 onClick={() => setGalleryIndex(null)}
-                className="absolute right-4 top-4 z-20 rounded-full bg-white p-3 text-slate-900 shadow-xl transition-transform hover:scale-105"
+                className="absolute right-4 top-4 z-20 border border-[#c9a77c]/60 bg-black/80 p-2.5 text-[#c9a77c] shadow-[0_0_24px_rgba(201,167,124,0.12)] backdrop-blur transition-colors hover:bg-[#c9a77c] hover:text-black"
                 aria-label="확대 이미지 닫기"
               >
                 <X className="h-5 w-5" />
               </button>
 
-              {gallery.length > 1 && (
+              {viewerImages.length > 1 && (
                 <>
                   <button
                     type="button"
                     onClick={(event) => {
                       event.stopPropagation();
-                      setGalleryIndex(
-                        (galleryIndex - 1 + gallery.length) % gallery.length,
-                      );
+                      showPreviousImage();
                     }}
-                    className="absolute left-3 z-20 rounded-full bg-white p-3 text-slate-900 shadow-xl transition-transform hover:scale-105 md:left-7"
+                    className="absolute left-3 z-20 border border-[#c9a77c]/60 bg-black/80 p-2.5 text-[#c9a77c] shadow-[0_0_24px_rgba(201,167,124,0.12)] backdrop-blur transition-colors hover:bg-[#c9a77c] hover:text-black md:left-7"
                     aria-label="이전 이미지"
                   >
                     <ChevronLeft className="h-6 w-6" />
@@ -498,9 +559,9 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                     type="button"
                     onClick={(event) => {
                       event.stopPropagation();
-                      setGalleryIndex((galleryIndex + 1) % gallery.length);
+                      showNextImage();
                     }}
-                    className="absolute right-3 z-20 rounded-full bg-white p-3 text-slate-900 shadow-xl transition-transform hover:scale-105 md:right-7"
+                    className="absolute right-3 z-20 border border-[#c9a77c]/60 bg-black/80 p-2.5 text-[#c9a77c] shadow-[0_0_24px_rgba(201,167,124,0.12)] backdrop-blur transition-colors hover:bg-[#c9a77c] hover:text-black md:right-7"
                     aria-label="다음 이미지"
                   >
                     <ChevronRight className="h-6 w-6" />
@@ -508,26 +569,74 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                 </>
               )}
 
-              <motion.figure
-                key={gallery[galleryIndex].src}
-                initial={{ opacity: 0, scale: 0.96 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.96 }}
-                className="flex max-h-[94vh] max-w-[92vw] flex-col overflow-hidden rounded-lg bg-white shadow-2xl"
+              <div className="pointer-events-none relative h-[calc(100vh-7rem)] w-[calc(100vw-5rem)] overflow-hidden md:h-[calc(100vh-8rem)] md:w-[calc(100vw-9rem)]">
+                <AnimatePresence initial={false} mode="sync">
+                  <motion.div
+                    key={viewerImages[galleryIndex].src}
+                    initial={{
+                      x:
+                        slideDirection > 0
+                          ? "100%"
+                          : slideDirection < 0
+                            ? "-100%"
+                            : 0,
+                    }}
+                    animate={{ x: 0 }}
+                    exit={{
+                      x: slideDirection > 0 ? "-100%" : "100%",
+                    }}
+                    transition={{ duration: 0.42, ease: [0.4, 0, 0.2, 1] }}
+                    className="absolute inset-0 flex items-center justify-center"
+                  >
+                    <figure
+                      className="pointer-events-auto flex max-h-full w-full max-w-6xl flex-col overflow-hidden border border-[#c9a77c]/40 bg-white shadow-[0_24px_80px_rgba(0,0,0,0.55)]"
+                      onClick={(event) => event.stopPropagation()}
+                    >
+                      <img
+                        src={viewerImages[galleryIndex].src}
+                        alt={viewerImages[galleryIndex].alt}
+                        className="max-h-[calc(100vh-11rem)] w-full bg-white object-contain md:max-h-[calc(100vh-12rem)]"
+                      />
+                      <figcaption className="border-t border-[#c9a77c]/35 bg-[#080808] px-4 py-3 font-mono text-xs leading-relaxed text-[#c9a77c]/80 md:px-6">
+                        <span className="mr-2 text-[#c9a77c]/45">[INFO]</span>
+                        {viewerImages[galleryIndex].caption}
+                      </figcaption>
+                    </figure>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+
+              <div
+                className="absolute bottom-3 left-1/2 z-20 flex -translate-x-1/2 items-center gap-4 border border-[#c9a77c]/45 bg-black/85 px-4 py-2.5 shadow-[0_0_28px_rgba(201,167,124,0.1)] backdrop-blur md:bottom-5"
                 onClick={(event) => event.stopPropagation()}
               >
-                <img
-                  src={gallery[galleryIndex].src}
-                  alt={gallery[galleryIndex].alt}
-                  className="max-h-[82vh] max-w-[92vw] bg-white object-contain"
-                />
-                <figcaption className="flex items-center justify-between gap-4 border-t border-slate-200 bg-white px-4 py-3 text-sm text-slate-700 md:px-6">
-                  <span>{gallery[galleryIndex].caption}</span>
-                  <span className="shrink-0 font-mono text-xs text-slate-400">
-                    {galleryIndex + 1} / {gallery.length}
-                  </span>
-                </figcaption>
-              </motion.figure>
+                <span className="min-w-[4.5rem] whitespace-nowrap font-mono text-[0.65rem] tracking-[0.12em] text-[#c9a77c]/75">
+                  [{String(galleryIndex + 1).padStart(2, "0")} / {String(viewerImages.length).padStart(2, "0")}]
+                </span>
+                <div className="flex items-center gap-2">
+                  {viewerImages.map((image, index) => (
+                    <button
+                      key={image.src}
+                      type="button"
+                      onClick={() => {
+                        if (index === galleryIndex) return;
+                        setSlideDirection(index > galleryIndex ? 1 : -1);
+                        setGalleryIndex(index);
+                      }}
+                      disabled={viewerImages.length === 1}
+                      className={`h-1.5 transition-all ${
+                        index === galleryIndex
+                          ? "w-6 bg-[#c9a77c] shadow-[0_0_8px_rgba(201,167,124,0.55)]"
+                          : "w-2 bg-[#c9a77c]/25 hover:bg-[#c9a77c]/55"
+                      } ${viewerImages.length === 1 ? "cursor-default" : ""}`}
+                      aria-label={`${index + 1}번째 이미지 보기`}
+                      aria-current={
+                        index === galleryIndex ? "true" : undefined
+                      }
+                    />
+                  ))}
+                </div>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
