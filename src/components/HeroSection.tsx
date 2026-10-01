@@ -26,6 +26,9 @@ export function HeroSection() {
         <div className="absolute inset-0 scanlines opacity-10" />
 
         <div className="text-center px-4 md:px-6 relative z-10 section-content">
+          <h1 className="sr-only">
+            이윤재 Corilla 보안 엔지니어·웹 개발자 포트폴리오
+          </h1>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
