@@ -145,7 +145,7 @@ function KeyContributions({
   contributions: string[];
   onMore: () => void;
 }) {
-  const maxLines = 5;
+  const maxLines = 8;
   const visibleItems = useMemo(
     () => contributions.slice(0, maxLines),
     [contributions]
@@ -212,9 +212,9 @@ export function ProjectsSection({ onProjectClick }: ProjectsSectionProps) {
     <button
       key={project.id}
       onClick={() => scrollToProject(index)}
-      className="border border-[#c9a77c]/40 p-2 md:p-3 hover:border-[#c9a77c] hover:bg-[#c9a77c]/5 transition-all cursor-pointer group retro-project-card min-w-0"
+      className="border border-[#c9a77c]/40 px-3 py-[clamp(0.65rem,1.4vh,0.9rem)] hover:border-[#c9a77c] hover:bg-[#c9a77c]/5 transition-all cursor-pointer group retro-project-card min-w-0"
     >
-      <div className="text-[#c9a77c]/60 group-hover:text-[#c9a77c] font-mono text-[clamp(0.6rem,1vw,0.75rem)] mb-1 transition-colors">
+      <div className="text-[#c9a77c]/60 group-hover:text-[#c9a77c] font-mono text-[clamp(0.6rem,1vw,0.75rem)] mb-1 transition-colors leading-tight">
         [{String(index + 1).padStart(2, "0")}]
       </div>
       <div className="text-[#c9a77c] group-hover:text-shadow-glow font-mono text-[clamp(0.65rem,1vw,0.85rem)] truncate transition-all">
@@ -226,9 +226,9 @@ export function ProjectsSection({ onProjectClick }: ProjectsSectionProps) {
   const scrollToProject = (projectIndex: number) => {
     const wrapper = document.querySelector(".horizontal-scroll-wrapper");
     if (wrapper) {
-      // First panel + project panels (projectIndex + 1 because first panel is overview)
+      // hero + 프로젝트 인덱스 2개 다음에 상세 패널이 이어집니다.
       wrapper.scrollTo({
-        left: (projectIndex + 2) * window.innerWidth, // +2 because: hero(0) + projects overview(1) + project index
+        left: (projectIndex + 3) * window.innerWidth,
         behavior: "smooth",
       });
     }
@@ -236,9 +236,9 @@ export function ProjectsSection({ onProjectClick }: ProjectsSectionProps) {
 
   return (
     <section id="projects" className="section-panel flex">
-      {/* Header Panel */}
-      <div className="section-panel h-screen py-14 pb-16 bg-black w-screen flex-shrink-0 flex items-center justify-center">
-        <div className="max-w-4xl mx-auto px-4 md:px-6 w-full text-center section-content">
+      {/* Security & Open Source Index */}
+      <div className="section-panel h-screen bg-black w-screen flex-shrink-0 flex items-center justify-center pt-[72px] pb-[64px]">
+        <div className="max-w-5xl mx-auto px-4 md:px-6 w-full text-center section-content">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -246,24 +246,21 @@ export function ProjectsSection({ onProjectClick }: ProjectsSectionProps) {
             transition={{ duration: 0.6 }}
           >
             <div className="text-[#c9a77c]/60 font-mono text-[clamp(0.65rem,1vw,0.75rem)] mb-2 tracking-widest">
-              [ PORTFOLIO ]
+              [ PROJECT INDEX 01 / 02 ]
             </div>
             <h2 className="text-[clamp(1.6rem,3vw,2.75rem)] mb-2 font-mono text-[#c9a77c] retro-text">
-              &gt; PROJECTS_
+              &gt; SECURITY PROJECTS_
             </h2>
-            <p className="text-[clamp(0.85rem,1.4vw,1.1rem)] text-[#c9a77c]/60 font-mono mb-4">
-              $ ls -la ~/projects/
+            <p className="text-[clamp(0.8rem,1.3vw,1.05rem)] text-[#c9a77c]/60 font-mono mb-4">
+              $ ls -la ~/projects/security/
             </p>
 
-            <div className="border-2 border-[#c9a77c]/30 p-4 md:p-5 lg:p-6 retro-box mb-4">
+            <div className="border-2 border-[#c9a77c]/30 p-4 md:p-5 retro-box mb-4">
               <div className="text-[#c9a77c]/80 font-mono text-[clamp(0.75rem,1.2vw,0.95rem)] mb-4">
-                &gt; Total: {projects.length} projects
-                <br />
-                &gt; Focus: Security Engineering, DevSecOps, Web Development
-                <br />
-                &gt; Status: Implemented + In Progress
+                &gt; {securityProjects.length} Security Projects
+                <br />&gt; {openSourceProjects.length} Open Source Contribution
               </div>
-              <div className="space-y-3 md:space-y-4 text-left">
+              <div className="space-y-4 text-left">
                 <div>
                   <div className="mb-2 font-mono text-[clamp(0.65rem,1vw,0.8rem)] text-[#c9a77c]/80 tracking-wider">
                     [ SECURITY PROJECTS ]
@@ -278,18 +275,8 @@ export function ProjectsSection({ onProjectClick }: ProjectsSectionProps) {
                   <div className="mb-2 font-mono text-[clamp(0.65rem,1vw,0.8rem)] text-[#c9a77c]/80 tracking-wider">
                     [ OPEN SOURCE CONTRIBUTION ]
                   </div>
-                  <div className="grid grid-cols-1 gap-2 md:max-w-sm md:gap-3">
+                  <div className="grid grid-cols-1 gap-2 md:max-w-md md:gap-3">
                     {openSourceProjects.map(({ project, index }) =>
-                      renderProjectButton(project, index)
-                    )}
-                  </div>
-                </div>
-                <div>
-                  <div className="mb-2 font-mono text-[clamp(0.65rem,1vw,0.8rem)] text-[#c9a77c]/80 tracking-wider">
-                    [ WEB DEVELOPMENT PROJECTS ]
-                  </div>
-                  <div className="grid grid-cols-3 md:grid-cols-4 gap-2 md:gap-3">
-                    {webProjects.map(({ project, index }) =>
                       renderProjectButton(project, index)
                     )}
                   </div>
@@ -298,7 +285,50 @@ export function ProjectsSection({ onProjectClick }: ProjectsSectionProps) {
             </div>
 
             <div className="hidden md:block text-[#c9a77c]/40 font-mono text-[clamp(0.65rem,1vw,0.8rem)]">
-              [CLICK projects above or SCROLL_RIGHT to view details →]
+              [CLICK a project or SCROLL_RIGHT for web projects →]
+            </div>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Web Development Index */}
+      <div className="section-panel h-screen bg-black w-screen flex-shrink-0 flex items-center justify-center pt-[72px] pb-[64px]">
+        <div className="max-w-5xl mx-auto px-4 md:px-6 w-full text-center section-content">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="text-[#c9a77c]/60 font-mono text-[clamp(0.65rem,1vw,0.75rem)] mb-2 tracking-widest">
+              [ PROJECT INDEX 02 / 02 ]
+            </div>
+            <h2 className="text-[clamp(1.6rem,3vw,2.75rem)] mb-2 font-mono text-[#c9a77c] retro-text">
+              &gt; WEB PROJECTS_
+            </h2>
+            <p className="text-[clamp(0.8rem,1.3vw,1.05rem)] text-[#c9a77c]/60 font-mono mb-4">
+              $ ls -la ~/projects/web/
+            </p>
+
+            <div className="border-2 border-[#c9a77c]/30 p-4 md:p-5 retro-box mb-4">
+              <div className="text-[#c9a77c]/80 font-mono text-[clamp(0.75rem,1.2vw,0.95rem)] mb-4">
+                &gt; {webProjects.length} Web Development Projects
+                <br />&gt; Services, Admin, BFF &amp; Data Processing
+              </div>
+              <div className="text-left">
+                <div className="mb-2 font-mono text-[clamp(0.65rem,1vw,0.8rem)] text-[#c9a77c]/80 tracking-wider">
+                  [ WEB DEVELOPMENT PROJECTS ]
+                </div>
+                <div className="grid grid-cols-3 md:grid-cols-4 gap-2 md:gap-3">
+                  {webProjects.map(({ project, index }) =>
+                    renderProjectButton(project, index)
+                  )}
+                </div>
+              </div>
+            </div>
+
+            <div className="hidden md:block text-[#c9a77c]/40 font-mono text-[clamp(0.65rem,1vw,0.8rem)]">
+              [CLICK a project or SCROLL_RIGHT for project details →]
             </div>
           </motion.div>
         </div>
@@ -508,16 +538,26 @@ export function ProjectsSection({ onProjectClick }: ProjectsSectionProps) {
                     <div className="text-[clamp(0.65rem,0.9vw,0.8rem)] font-mono text-[#c9a77c] mb-[clamp(0.2rem,0.8vh,0.4rem)]">
                       [CHALLENGES]
                     </div>
-                    <div className="text-[clamp(0.6rem,0.85vw,0.75rem)] font-mono text-[#c9a77c]/60">
-                      {project.problems.length} issues solved
+                    <div className="flex items-baseline gap-2 font-mono">
+                      <span className="text-[clamp(1.15rem,1.8vw,1.55rem)] leading-none text-[#c9a77c]">
+                        {project.problems.length}
+                      </span>
+                      <span className="text-[clamp(0.6rem,0.85vw,0.75rem)] text-[#c9a77c]/60">
+                        problems identified
+                      </span>
                     </div>
                   </div>
                   <div className="border-2 border-[#c9a77c]/50 p-[clamp(0.5rem,1vw,0.75rem)] md:p-[clamp(0.6rem,1.2vw,0.9rem)]">
                     <div className="text-[clamp(0.65rem,0.9vw,0.8rem)] font-mono text-[#c9a77c] mb-[clamp(0.2rem,0.8vh,0.4rem)]">
                       [SOLUTIONS]
                     </div>
-                    <div className="text-[clamp(0.6rem,0.85vw,0.75rem)] font-mono text-[#c9a77c]/60">
-                      {project.solutions.length} implemented
+                    <div className="flex items-baseline gap-2 font-mono">
+                      <span className="text-[clamp(1.15rem,1.8vw,1.55rem)] leading-none text-[#c9a77c]">
+                        {project.solutions.length}
+                      </span>
+                      <span className="text-[clamp(0.6rem,0.85vw,0.75rem)] text-[#c9a77c]/60">
+                        solutions implemented
+                      </span>
                     </div>
                   </div>
                 </div>
